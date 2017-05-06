@@ -1,24 +1,24 @@
 /*CSS reset*/
-li {
-    list-style: none;
-}
-ul {
-    padding-left: 0;
-}
 html, body, p {
     margin:0;
     padding: 0;
 }
+ul {
+    padding-left: 0;
+}
+li {
+    list-style: none;
+}
 
 /*Comnon CSS*/
+body {
+    background: #ddd;
+    font-family: "microsoft yahei", "sans-serif";
+}
 .layout {
     width: 960px;
     margin: 0 auto;
     background: #fff;
-}
-body {
-    background: #ddd;
-    font-family: "microsoft yahei";
 }
 .clearfix:after {
     content: "";
@@ -34,14 +34,13 @@ body {
 .badge {
     width:150px;
     height:150px;
-    background:#000;
     border-radius: 75px;
-    color:#fff;
-    font-size:22px;
-    overflow: hidden;
     position: relative;
     display: inline-block;
     vertical-align: middle;
+    background:#000;
+    color:#fff;
+    font-size:22px;
 }
 .badge:after {
     content:"";
@@ -66,19 +65,19 @@ body {
     right:40px;
     bottom:0px;
 }
-.name {
+.full-name {
     display: inline-block;
     height: 150px;
     vertical-align: middle;
     padding-left: 40px;
 }
-.name h1 {
+.full-name h1 {
     font-size:45px;
     font-weight: 100;
     margin-top: 23px;
     margin-bottom: 10px;
 }
-.name p {
+.full-name p {
     font-size: 18px;
 }
 .contacts {
@@ -86,27 +85,25 @@ body {
     height: 150px;
     width:400px;
     vertical-align: middle;
-    margin-left: 200px;
 }
-.contacts h2{
+.contacts h2 {
     font-size: 20px;
-    margin-top:5px;
-    margin-bottom: 5px;
-    padding-top: 0;
-    padding-bottom: 0;
+    margin: 5px 0;
+    padding: 0;
     border-bottom: 2px solid #000;
 }
 .contacts ul {
     margin-top: 10px;
     margin-bottom: 0;
 }
-.dt {
+li .dt {
     display: inline-block;
     width:30px;
     line-height: 27px;
+    font-weight: bold;
 }
 #content {
-    padding-top:80px;
+    padding-top: 80px;
     padding-left: 45px;
 }
 h2.title {
@@ -120,7 +117,10 @@ p.subtitle {
     font-size: 16px;
     position: relative;
 }
-p.subtitle:before {
+p.subtitle:first-of-type {
+    border:0px;
+}
+p.subtitle:before {           /*标题前原点*/
     content:"";
     display: inline-block;
     height:10px;
@@ -132,22 +132,27 @@ p.subtitle:before {
     top: 0px;  
 }
 p.content {
+    width: 830px;
     border-left:1px solid #000;
     padding-left: 40px;
     padding-top: 10px;
     padding-bottom: 12px;
     position: relative;
     font-size: 14px;
-}
-.introduce p.subtitle:first-of-type {
-    border:0px;
+    line-height: 30px;
+    text-align: justify;
 }
 p.content:last-of-type {
     padding-bottom:0;
 }
-p.subtitle span {
+p .work-date{
+    color:#ccc;
+}
+p .major-subject {
     display: block;
     padding-left: 10px;
+    color: #ccc;
+    font-weight: 100;
 }
 p.subtitle:first-of-type:after {
     content:"";
@@ -171,9 +176,7 @@ p.subtitle:first-of-type:after {
     font-size: 16px;
 }
 .content2 {
-    padding-left: 40px;
-    padding-top: 10px;
-    padding-bottom: 12px;
+    padding: 10px 0 12px 40px;
     font-size: 14px;
 }
 .plus li {
@@ -201,4 +204,3 @@ p.plus:before {
     top: 0;
     margin-right: 0;
 }
-
