@@ -1,67 +1,88 @@
 /*css reset*/
+
 a {
-	text-decoration: none;
-	color: #000;
+    text-decoration: none;
+    color: #000;
 }
+
 ul {
-	padding-left: 0;
+    padding-left: 0;
 }
+
 ul li {
-	list-style: none;
+    list-style: none;
 }
+
 
 /*common css*/
+
 ul li {
-	display: inline-block;
-}
-body {
-	font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
-	text-align: center;   /*可以继承*/
-	color: #87968e;
-	font-size: 14px;
+    display: inline-block;
 }
 
-/*specified css*/
 body {
-	background:#fff2e3;
+    font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    text-align: center;
+    /*可以继承*/
+    color: #87968e;
+    font-size: 14px;
 }
+
+
+/*specified css*/
+
+body {
+    background: #fff2e3;
+}
+
 .layout {
-	width: 800px;
-	margin:0 auto;
+    width: 800px;
+    margin: 0 auto;
 }
+
 h1 {
-	font-size: 42px;
-	margin-top: 30px;
+    font-size: 42px;
+    margin-top: 30px;
 }
-h1 + p {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	opacity: 0.6;
+
+h1+ p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    opacity: 0.6;
 }
+
 ul {
-	margin: 40px 0;
+    margin: 40px 0;
 }
+
 ul li {
-	margin: 3px;
+    margin: 3px;
 }
-.btn {						/*.btn加在a上，不然鼠标移动到li上不能点击a链接*/
-	display: inline-block;
-	padding:6px 14px;
-	background:#72b890;
-	color:#fff;
-	border-radius: 2px;
+
+.btn {
+    /*.btn加在a上，不然鼠标移动到li上不能点击a链接*/
+    display: inline-block;
+    padding: 6px 14px;
+    background: #72b890;
+    color: #fff;
+    border-radius: 2px;
 }
+
 .btn:hover {
-	opacity: 0.8;
+    opacity: 0.8;
 }
-.active {                           /*chrome查看伪类：点击filter :hov*/     
-	opacity: 0.6;
+
+.active {
+    /*chrome查看伪类：点击filter :hov*/
+    opacity: 0.6;
 }
+
 #footer ul,
 #footer p {
-	margin-top: 30px;
-	margin-bottom: 0;
+    margin-top: 30px;
+    margin-bottom: 0;
 }
-#footer p > a{
-	color:#72b890;
+
+#footer p> a {
+    color: #72b890;
 }
