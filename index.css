@@ -251,17 +251,189 @@ i.fa-circle {
     width: 225px;
     border: 7px solid #fff;
     border-radius: 50%;
-    
 }
 .member li {
+    margin-bottom: 50px;
     padding: 0 60px;
     float: left;
 }
+.member h5 {
+    margin-top: 25px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.1;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333;
+}
+.member p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.75;
+    font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #777;
+}
 .member-contact a {
     display: inline-block;
-    background: #000;
+    margin: 0 5px;
+    background: #333;
     height: 40px;
     width: 40px;
     line-height: 40px;
     border-radius: 50%;
 }
+.team .team-ending {
+    margin: 0 auto;
+    width: 750px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.75;
+    color: #777;
+}
+.partner {
+    text-align: center;
+    padding: 0;
+}
+.partner a {
+    display: inline-block;
+    margin: 50px 1%;
+    width: 22%;            /*margin为0时，为什么25平分4份不行*/
+    box-sizing: border-box;
+}
+.contact-bg {
+    background: #222 url(img/map-image.png) no-repeat center center /cover;
+}
+.contact {
+    text-align: center;
+    padding: 150px 0;
+}
+.contact h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: #fff;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.contact h4 + p {
+    margin-top: 0;
+    margin-bottom: 75px;
+    font-size: 16px;
+    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #777;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.75;   /*用line-height控制单行文本上下间距也可以*/
+}
+.contact-left {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding:15px ;
+}
+.contact-right {
+    box-sizing: border-box;
+    float: right;
+    width: 50%;
+    padding:15px ;
+    margin-bottom: 10px;
+}
+.contact input[type="text"] {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 26px;
+    border-radius: 4px; 
+    font-size: 16px;
+    line-height: 1.1;
+}
+.contact textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    border-radius: 4px; 
+    font-size: 14px;
+    line-height: 1.1;
+}
+::-webkit-input-placeholder { /* WebKit browsers */  
+    font-family: Helvetica,Arial,sans-serif;
+    color:#bbb;
+    font-size: 14px;  
+    font-weight: 700;
+    text-transform: uppercase;
+}  
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */  
+    font-family: Helvetica,Arial,sans-serif;
+    color:#bbb;
+    font-size: 14px;  
+    font-weight: 700;
+    text-transform: uppercase;
+}  
+::-moz-placeholder { /* Mozilla Firefox 19+ */  
+    font-family: Helvetica,Arial,sans-serif;
+    color:#bbb;
+    font-size: 14px;  
+    font-weight: 700;
+    text-transform: uppercase;
+}  
+:-ms-input-placeholder { /* Internet Explorer 10+ */  
+    font-family: verdana,"Helvetica Neue",Helvetica,Arial,sans-serif;;
+    color:#bbb;
+    font-size: 14px;  
+    font-weight: 700;
+    text-transform: uppercase;
+} 
+input[type="submit"] {
+    display: inline-block;
+    text-align: center;
+    background: #fed136;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 20px 40px;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+input {
+    outline-color: #fed136;
+    border: 0px;
+}
+#footer {
+    padding: 25px;
+    font-size: 14px;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+#footer ul{
+    margin: 0;
+    text-align: center;
+}
+#footer a.icon {
+    text-align: center;
+    display: inline-block;
+    margin: 0 5px;
+    background: #333;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+}
+#footer .link,
+.copyright {
+    color: #fed136;
+    font-size: 16px;
+    line-height: 40px;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.copyright {
+    color: #333;
+}
+#footer li {
+    display: inline-block;
+    width: 33%;
+} 
