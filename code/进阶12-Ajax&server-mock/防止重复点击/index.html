@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+	      font-family: 'DengXian';
+	    }
+	    #load-more{
+	      text-decoration:none;
+	      display:block;
+	      margin:0 auto;
+	      padding:8px 2px;
+	      text-align:center;
+	      width:80px;
+	      border:1px solid #1e88e5;
+	      color:#666;
+	      font-size:16px;
+	      border-radius: 3px;
+	    }
+	    /*注意loading.gif背景色透明或与a链接背景色一致*/
+	    #load-more.click{
+	      background:url(loading.gif) center no-repeat ;
+	      background-size:contain;
+	    }
+	    /*‘a’链接中换成loading图片时，没有文字，需要被撑开*/
+	    #load-more.click:before{
+	    	content: '';
+	    	height: 16px;
+	    	display: block;
+	    }
+	    .ct{
+	      margin:10px;
+	      padding:0;
+	    }
+	    .ct li{
+	      list-style:none;
+	      padding:20px;
+	      margin: 10px;
+	      background:#eee;
+	      border-radius:3px;
+	    }
+	    .ct li:hover{
+	    	background:blue;
+	    	color:#fff;
+	    }
+	    /*注意优先级，不加li优先级<前面的.ct li*/
+	    /*li.hover{
+	    	background: blue;
+	    }*/
+	</style>
+</head>
+<body>
+	<ul class="ct"></ul>
+	<a href="#" class="btn" id="load-more">加载更多</a>
+	<script>
+		var btn = document.querySelector('#load-more')
+		var ct = document.querySelector('.ct')
+		//设置一个状态,点击响应前忽略再次点击
+		var isLoading = true
+		var index = 0
+		var len = 5
+		
+		btn.addEventListener('click',function(e){
+			//阻止a链接默认事件
+			e.preventDefault()
+			
+			//如果正在请求数据，忽略重复点击
+			if(!isLoading){
+				return
+			}
+
+			ajax('/loadMore', {
+		      index: index,
+		      len: len
+		    }, function(data){
+		      appendData(data)
+		      isLoading = true   //得到数据 解锁
+		      index = index + len 
+		    })
+		    isLoading = false   //发送请求 加锁
+		})
+
+
+		function ajax(url,json,onSucess,onError){
+			var xhr = new XMLHttpRequest()
+		    var arr = []
+		    //拼装url
+		    for (key in json) {
+		      arr.push(key + '=' + json[key])
+		    }
+		    url += '?' + arr.join('&')
+		    xhr.open('get', url, true)
+		    xhr.send()
+		    xhr.onload = function () {
+			    //如果请求成功
+			    if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+			        onSucess(JSON.parse(xhr.responseText))
+			    }else{
+			    	console.log('出错了')
+			    }
+			  }
+		}
+		function appendData(data){
+			var fragment = document.createDocumentFragment()
+		    for(var i = 0; i<data.length; i++){
+		      var child = document.createElement('li')
+		      child.innerText = data[i]
+		      fragment.appendChild(child)
+		    }
+		    ct.appendChild(fragment)
+		}
+		  
+
+
+	</script>
+</body>
+</html>
+
+<!-- 
+1.get
+2.我提供index和length
+3.我需要得到数组[新闻1 新闻2 新闻3....]
+ -->
