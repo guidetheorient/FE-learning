@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>JSONP</title>
+	<title>CORS</title>
     <style>
       body{
         font-family:'Dengxian','sans-serif';
@@ -21,13 +21,22 @@
 		var ct = $('.ct')
 		var btn = $('#getNews')
 		btn.addEventListener('click',function(){
-			var script = document.createElement('script')
-			script.src = 'http://b.jrg.com:8080/getNews?callback=getNews'
-			document.body.appendChild(script)
-			document.body.removeChild(script)
+			var xhr = new XMLHttpRequest()
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4){
+					if(xhr.status >= 200 && xhr.status <300 || xhr.status == 304){
+						getNews(xhr.responseText)
+					}
+				}
+			}
+			//注意localhost端口是8080啊，要加上，不然默认是80
+			xhr.open('get','http://b.jrg.com:8080/getNews',true)
+			xhr.send(null)
+
 		})
 
 		function getNews(data){
+			var data = JSON.parse(data)
 			var news = document.createDocumentFragment()
 			for(var i=0;i<data.length;i++){
 				var li = document.createElement('li')

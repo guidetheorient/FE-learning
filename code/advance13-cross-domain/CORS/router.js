@@ -7,11 +7,6 @@ app.get('/getNews',function(req,res){
 		data.push(news[index])
 	}
 
-	var callback = req.query.callback
-	if(callback){
-		//JOSN数组就是字符串，所以页面不需要JSON.parse
-		res.send(callback+'('+ JSON.stringify(data) +')')
-	} else {
-		res.send(data)
-	}
+	res.header('Access-Control-Allow-Origin','http://localhost:8080')
+	res.send(data)
 })
