@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery</title>
+	<script src="./jquery-3.2.0.js"></script>
+	<style>
+	  ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    a{
+      text-decoration: none;
+      color: #fff
+    }
+    body{
+      color: #fff;
+    }
+    .ct{
+      width: 200px;
+      padding: 0 10px;
+      background-color: #ff0036;
+      box-sizing: border-box;
+    }
+    .ct>li{
+      padding: 10px 0;
+      border-bottom: 1px dotted #de272e;
+      position: relative;
+    }
+    .ct a{
+      display: inline-block;
+      width: 160px;
+      padding-right: 4px;
+    }
+    .ct .panel{
+      position: absolute;
+      width: 200px;
+      left: 190px;
+      top: 0;
+      color: #333;
+      padding: 8px;
+      border:1px solid #eee;
+      font-size: 12px;
+      display: none;
+    }
+    .panel li{
+      display: inline-block;  /*inline-block间隙*/
+      box-sizing: border-box;
+      width: 50%;
+      margin-right:-4px; /*清除间隙 */
+      padding: 5px;
+      background: #fff;
+
+    }
+    .panel.hover{
+      display: block;
+    }
+	</style>
+</head>
+<body>
+  <ul class="ct">
+    <li class="item1">
+      <a href="#">珠宝玉器</a>
+      <span class="right-arrow">></span>
+      <ul class="panel">
+        <li>翡翠</li>
+        <li>玉石</li>
+        <li>宝石</li>
+        <li>水晶</li>
+        <li>玛瑙</li>
+        <li>珍珠</li>
+        <li>钻石</li>
+      </ul>
+    </li>
+    <li class="item2">
+      <a href="#">珠宝玉器</a>
+      <span class="right-arrow">></span>
+      <ul class="panel">
+        <li>翡翠</li>
+        <li>玉石</li>
+        <li>宝石</li>
+        <li>水晶</li>
+        <li>玛瑙</li>
+      </ul>
+    </li>
+    <li class="item3">
+      <a href="#">珠宝玉器</a>
+      <span class="right-arrow">></span>
+      <ul class="panel">
+        <li>翡翠</li>
+        <li>玉石</li>
+        <li>宝石</li>
+        <li>水晶</li>
+        <li>玛瑙</li>
+        <li>珍珠</li>
+        <li>钻石</li>
+      </ul>
+    </li>
+    <li class="item4">
+      <a href="#">珠宝玉器</a>
+      <span class="right-arrow">></span>
+      <ul class="panel">
+        <li>翡翠</li>
+        <li>玉石</li>
+        <li>宝石</li>
+        <li>水晶</li>
+        <li>玛瑙</li>
+      </ul>
+    </li>
+    <li class="item5">
+      <a href="#">珠宝玉器</a>
+      <span class="right-arrow">></span>
+      <ul class="panel">
+        <li>翡翠</li>
+        <li>玉石</li>
+        <li>宝石</li>
+        <li>水晶</li>
+        <li>玛瑙</li>
+        <li>珍珠</li>
+        <li>钻石</li>
+      </ul>
+    </li>
+  </ul>
+	<script>
+    var $ct = $('.ct')
+    $ct.find('li')
+       .mouseover(function () {
+          $(this).children('.panel').addClass('hover')
+        })
+       .mouseout(function(){
+          $(this).children('.panel').removeClass('hover')
+        });
+	</script>
+</body>
+</html>
+<script>
+    
+    /*
+    hide show toggle
+    fadeIn fadeOut toggleFade
+    slideUp slideDown slideToggle   百叶窗$().siblings.find(子节点).slideDown
+    animate
+    finish结束所有动画  stop停在当前帧的结尾
+    */
+    // $('.hunger').show
+    //             .hide
+    //             .hahha
+    //多个动画可以把状态放数组里，再用forEach遍历
+  </script>
