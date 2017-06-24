@@ -175,6 +175,14 @@
     autoPlay()
     function autoPlay(){
       clock = setInterval(function(){showAfter()},2000)
+      console.log(clock)
+      //多个选择器绑定可以$()用逗号隔开
+      //多个对象绑定同一事件可以用add()
+      $preArrow.add($nextArrow).add($rectIcon).on('click',function(){
+        clearInterval(clock)
+        clock = setInterval(function(){showAfter()},2000)
+        console.log(clock,1)
+      })
     }
     function stopPlay(){
       clearInterval(clock)
