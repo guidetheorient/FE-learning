@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lazyload-waterfall</title>
+</head>
+<body>
+    <script>
+
+        var currentPage = 1;
+        var perPageCount = 10;
+
+        getData(function(newsList){
+          $.each(newsList,function(index,news){
+            var $node = getNode(news)
+            $node.find('img').load(function(){
+              $('#pic-ct').append($node)
+            })
+          })
+        })
+
+        function getData(callback){
+          $.ajax({
+            url:'',
+            dataType:'jsonp',
+            jsonp:'jsoncallback',
+            data:{
+              //传给后台的数据
+               //每一页数量
+              num: perPageCount,
+                //第几页了
+              page:currentPage
+            }
+          }).done(function(ret){
+            if(ret && ret.status && ret.status.code === '0'){
+              //数据没问题，就生成节点放在页面上
+              callback(ret.data)
+            }else {
+              console.log('error')
+            }
+          })
+        }
+
+
+        //性能优化
+        var clock;
+        $(window).on('scroll',function(){
+          if(clock){
+            clearTimeout(clock)
+          }
+          clock = setTimeout(function(){
+            checkShow()
+          },100)
+        })
+        checkShow()
+
+
+        function checkShow(){
+          if(isShow($('.load')){
+            loadAndPlace()
+          })
+        }
+        function isShow($el){
+          var scrollTop = $(window).scrollTop()
+          var windowHeight = $(window).height()
+          var offsetTop = $node.offset().top
+          if(offsetTop < windowHeight + scrollTop&&offsetTop > scrollTop){
+            return true
+          }
+        }
+
+    </script>
+</body>
+</html>
