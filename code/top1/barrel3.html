@@ -5,9 +5,8 @@
   <title>木桶布局</title>
   <style>
     .ct{
-      width: 960px;
+      width: 500px;
       margin: 0 auto;
-      /*border: 1px solid #000;*/
     }
     .img-row{
       margin-bottom: 10px;
@@ -20,29 +19,24 @@
     .img-row>div.img{
       float: left;
       height: 200px;
-      /*margin-left: 5px;*/
     }
-/*    div.img:first-child{
-      margin-left: 0;
-    }*/
   </style>
 </head>
 <body>
   <div class="ct">
   </div>
-  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="./jquery-3.2.1.min.js"></script>
   <script>
-  //获取url
-  //生成
-  //遍历图片，将每张图片放在某行计算是否超出
-  //放置图片
     function Barrel(){
       this.imgRowWidth = 0
       this.imgList = []
       this.$ct = $('.ct')
       this.loadImg()
     }
-
+    //获取图片
+    //对每张图片统一高度，放入一个数组中
+    //遍历数组是否宽度超出，超出则去掉最后一个，重新计算高度
+    //生成一行图片放在页面中
     Barrel.prototype = {
       getImage:function(num){
         var width,height,color,urls = []
@@ -60,46 +54,64 @@
         var imgurls = this.getImage(20)
         var ctWidth = $('.ct').width()
         var count = 0
+        //console.log(imgurls)
+
         xx()
         function xx(){
-          $.each(imgurls,function(index, el) {
+          var loadedImgList = []
+          for(var i = 0;i<imgurls.length;i++){
             var img = new Image()
-            img.src = el
-            img.onload = function(){  //onload不是jquery方法
+            img.src = imgurls[i]
+            //这里img.src和img.onload的img没有任何关系img.
+            //onload可能是任意一张加载好的图片
+            img.onload = function(){
+              loadedImgList.push(this.src)
+              //console.log(this.src)
+              // 使用for循环不能通过img.width获取宽度了,执行完一次循环
+              // img就变了，要用this了
+              // console.log(this.width)
               count++
-              _this.imgList.push(img)
-              img.width = 100*img.width/img.height
-              img.height = 100
-              _this.imgRowWidth += img.width
+              _this.imgList.push(this)
+              this.width = 100*this.width/this.height
+              this.height = 100
+              _this.imgRowWidth += this.width
 
               if(_this.imgRowWidth > ctWidth){
                 _this.imgList.pop()
-                ratio = ctWidth/(_this.imgRowWidth-img.width)
-
-                if($('.ct').height() < $(window).height()){
-                  _this.layout()
-                  _this.imgList = []
-                  _this.imgRowWidth = 0
-                  imgurls = imgurls.slice(count-1)
-                  imgurls = imgurls.concat(_this.getImage(20))
-                  count = 0
-                  xx()
-                }
+                ratio = ctWidth/(_this.imgRowWidth-this.width)
+                _this.layout()
+                //图片不是按顺序加载的，所以不能直接裁掉前面的图片
+                //console.log(imgurls)
+                _this.imgList = []
+                // console.log(this)
+                // _this.imgList.push(this)
+                _this.imgRowWidth = 0
+              }
+              if($('.ct').height() < $(window).height()&&count === imgurls.length){
+                $.each(loadedImgList,function(i,el){
+                  index = imgurls.indexOf(el)
+                  imgurls.splice(index,1)
+                })
+                console.log(imgurls.length)
+                imgurls = imgurls.concat(_this.getImage(20))
+                count = 0
+                xx()
               }
             }
-          })
+         
+          }
         }
       },
 
       layout:function(){
         var _this = this
-        this.$ct.append('<div class="img-row"></div>')
-        var $imgRow = $('.img-row').last()
-        $.each(this.imgList,function(index,el){  //每个el是不是只能append一次
+        var $imgRow = $('<div class="img-row"></div>')
+        $.each(this.imgList,function(index,el){
           el.height *= ratio
           el.width *= ratio
           $imgRow.append(el)
         })
+        this.$ct.append($imgRow)     
       }
     }
 
