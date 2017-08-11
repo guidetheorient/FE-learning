@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lazyload</title>
+    <style>
+        img{
+            display: block;
+            height: 200px;
+            margin: 5px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="lazy-load"></div>
+    <div id="hello">hello</div>
+    <div id="world">world</div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        //mock占位符
+        placeHolder()
+        function placeHolder() {
+             //放置占位符
+            var img =''
+            for(var i=0;i<20;i++){
+                img += '<img src="http://fakeimg.pl/300x200/" data-src="https://unsplash.it/300/200?image='+ i +'">'  //错误1，少加了一个分号，log到怀疑人生
+            }
+            $('.lazy-load').append(img)
+        }
+
+        function LazyLoad($node,callback,string){
+            this.$node = $node
+            this.callback = callback
+            this.loadNode()
+            this.bind()
+
+            //用于实现多次曝光，只一次变化
+            this.string = string
+        }
+
+        LazyLoad.prototype.bind = function () {
+            var _this = this
+            $(window).scroll(function(){
+                _this.loadNode()
+            })
+        }
+        
+        LazyLoad.prototype.loadNode = function () {
+            if(this.isVisible(this.$node)&& !(this.string&&this.isLoaded(this.$node))){
+                this.callback(this.$node)
+
+                //放在callback里面有大机率会执行两次$node的修改，放在这里没问题
+                this.$node.addClass('loaded')
+            }
+        }
+
+        LazyLoad.prototype.isVisible = function ($node) {
+            var scrollTop = $(window).scrollTop()
+            var windowHeight = $(window).height()
+            var offsetTop = $node.offset().top
+            var nodeHeight = $node.height()
+            if(offsetTop < windowHeight + scrollTop && offsetTop+nodeHeight > scrollTop){
+                return true
+            }
+        }
+
+        LazyLoad.prototype.isLoaded = function ($node) {
+            if($node.hasClass('loaded')){
+                return true
+            }
+            return false
+        }
+
+        //原来只适用于图片懒加载，现在要改成不同类型的曝光加载
+        var lazyLoads = (function(){
+            return {
+                init: function ($node,callback) {
+                    $node.each(function (index,element) {
+                        new LazyLoad($(element),callback)
+                    })
+                },
+                onlyOnce: function ($node,callback) {
+                    $node.each(function (index,element) {
+                        new LazyLoad($(element),callback,'onlyOnce')
+                    })
+                }
+            }
+        })()
+
+        lazyLoads.init($('#hello'),function ($node) {
+            $node.text($node.text() + '11')
+        })
+
+        lazyLoads.onlyOnce($('#world'),function ($node) {
+            setTimeout(function () {
+                $node.text($node.text() + '22')
+            },3000)
+
+
+        })
+
+        lazyLoads.init($('.lazy-load img'),function ($node) {
+            setSrc($node)
+        })
+
+        function setSrc($node) {
+            $node.attr('src',$node.attr('data-src'))
+            $node.addClass('loaded')
+        }
+    </script>
+</body>
+</html>
