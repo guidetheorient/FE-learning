@@ -1,0 +1,54 @@
+.carousel{
+  overflow: hidden;
+  position: relative;
+}
+.arrow-icon li{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top:50%;
+  margin-top: -25px;
+  text-align: center;
+  line-height: 50px;
+  border:1px solid #fff;
+  font-size: 30px;
+  font-weight: 100;
+  font-family: 'sans-serif';
+  color: #fff;
+  cursor: pointer;
+}
+.pre-arrow{
+  left: 20px;
+}
+.next-arrow{
+  right: 20px;
+}
+.rect-icon{
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  text-align: center;
+}
+.rect{
+  display: inline-block;
+  width: 40px;
+  height: 8px;
+  margin: 10px 5px;
+  border-radius: 10px;
+  border:1px solid #fff;
+  cursor: pointer;
+}
+.rect.active{
+  background-color: #fff;
+}
+ul.img-ct{
+  font-size: 0;
+  position: relative;
+  z-index: -1;
+}
+.img-ct li{
+  display: inline-block;
+}

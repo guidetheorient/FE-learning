@@ -13,8 +13,8 @@
 </head>
 <body>
     <div class="lazy-load"></div>
-    <div id="hello">hello</div>
-    <div id="world">world</div>
+    <div id="hello">(lazyload init)hello</div>
+    <div id="world">(lazyload onlyOnce)world</div>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script>
         //mock占位符
@@ -94,9 +94,7 @@
         lazyLoads.onlyOnce($('#world'),function ($node) {
             setTimeout(function () {
                 $node.text($node.text() + '22')
-            },3000)
-
-
+            },2000)
         })
 
         lazyLoads.init($('.lazy-load img'),function ($node) {
