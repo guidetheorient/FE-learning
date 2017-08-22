@@ -1,4 +1,1 @@
-#### 运行本demo
-1. npm i安装依赖
-2. npm run webpack
-3. page.html显示hello Vue~
+### [预览](https://guidetheorient.github.io/FELearning/code/graduateProject1/task3/page.html)
