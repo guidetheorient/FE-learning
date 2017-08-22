@@ -24,9 +24,23 @@ var app = new Vue({
     created:function () {
         window.onbeforeunload = ()=>{
             let session = JSON.stringify(this.todoList)
-            localStorage.setItem('myTodos',session)
+            window.localStorage.setItem('myTodos',session)
+            
+            let newTodoSession = JSON.stringify(this.newTodo)
+            localStorage.setItem('myNewTodo',newTodoSession)
         }
-        let previousData = JSON.parse(localStorage.getItem('myTodos'))
+        
+        let previousData = JSON.parse(window.localStorage.getItem('myTodos'))
         this.todoList = previousData || []
+        // if(Array.isArray(previousData)){
+        //     this.todoList = previousData;
+        // }else{
+        //     this.todoList = [];
+        // }
+
+        let previousNewTodo = JSON.parse(localStorage.getItem('myNewTodo'))
+        //console.log(typeof previousNewTodo)
+        this.newTodo = previousNewTodo || ''
+        //不加||''，第一次挂了，提示this.todoList.push和splice is not a func
     }
 })
