@@ -5,52 +5,249 @@
         [v-cloak]{
             display: none;
         }
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        ol,ul,li{
+            list-style: none;
+        }
+        html,body{
+            background-color: #60CDF6;
+            color:#fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-weight: 600;
+        }
+        .container{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .title{
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title>.product-name{
+            font-size: 60px;
+        }
+        .title>.product-simple-info{
+            font-size: 22px;
+        }
+        .action-type{
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+        .action-type > label{
+            margin-right: 10px;
+        }
+        .action-type > label > input{
+            display: none;
+        }
+        #signInAndSignUp input[type="text"]{
+            display: block;
+            padding: 10px;
+            width: 250px;
+            border: 0.5px solid transparent;
+            border-radius: 4px;
+            font-size: 15px;
+            overflow: hidden;
+            color: #333;
+        }
+        #signInAndSignUp input[type="text"]:focus{
+            border-color: #66afe9;
+            outline: 0;
+        }
+        input{
+            margin-bottom: 10px;
+        }
+        input::-webkit-input-placeholder{
+            color:#ccc;
+        }
+        input::-ms-input-placeholder{
+            color:#ccc;
+        }
+        input::-moz-placeholder{
+            color: #ccc;
+        }
+        .formActions>input[type="submit"],
+        .logout-button{
+            padding: 10px;
+            background-color: #009BD0;
+            color: #fff;
+            border:1px solid transparent;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .formActions>input[type="submit"]{
+            width: 250px;
+        }
+        .signUp,.login{
+            position: relative;
+        }
+        .signUp:before,
+        .login:before{
+            content: '';
+            position: absolute;
+            top: -14px;
+            border:7px solid transparent;
+            border-bottom: 10px solid #fff;
+            transition:all 0.8s
+        }
+        .login:before{
+            left: 80px;
+        }
+        .signUp:before{
+            left: 18px;
+        }
+        #todo{
+            /*min-width: 600px;*/
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-image: linear-gradient(100deg,#5973EE 0,#4184F5 50%,#2D93FA 100%)
+        }
+        #todo>.header,
+        #todo>.newTask,
+        #todo>.todos{
+            margin: 15px 30px 0 30px;
+        }
+        #todo>.header{
+            margin: 30px;
+            height: 118px;
+            font-weight: 200;
+        }
+        #todo>.header >.hi-user{
+            display: inline-block;
+            margin-top: 18px;
+            font-size: 50px;
+        }
+        #todo>.header>.date-now{
+            font-size: 20px;
+        }
+        #todo>.header >.logout-button{
+            float: right;
+        }
+        #todo .todo-li{
+            height: 50px;
+            border-bottom: 1px solid #ccc;
+        }
+        .todo-li input[type="checkbox"]{
+            display: none;
+        }
+        .todo-li input[type="checkbox"]+label{
+            display: inline-block;
+            background-color: #fff;
+            border: 1px solid #666;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+        .newTask input[type="text"]{
+            display: block;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            border: 0.5px solid #ccc;
+            font-size: 20px;
+            overflow: hidden;
+            color: #333;
+            vertical-align: middle;
+        }
+        .icon {
+           width: 1em; 
+           height: 1em;
+           vertical-align: -0.15em;
+           fill: #009BD0;
+           overflow: hidden;
+           opacity: 0
+        }
+        .todo-li input[type="checkbox"]:checked+label .icon{
+            opacity: 1
+        }
+        .todo-index{
+            font-size: 20px;
+            font-weight: 200;
+            margin: 0 20px 0 10px;
+            vertical-align: middle;
+        }
+        .todo-content{
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .created-time{
+            text-align: right;
+            font-size: 16px;
+            font-weight: 200;
+        }
+        .todo-li > *{
+            line-height: 50px;
+            vertical-align: middle;
+        }
     </style>
+    <script src="https://at.alicdn.com/t/font_391266_jhll33e7q8t49529.js
+"></script>
   </head>
   <body>
-    <div id="app" v-cloak>
+    <div id="app" class="container">
         <section id="signInAndSignUp" v-if="!currentUser">
-            <div>
-                <label><input type="radio" name="type" v-model="actionType" value="signUp">注册</label>
-                <label><input type="radio" name="type" v-model="actionType" value="login">登录</label>
+            <div class="title">
+                <h1 class="product-name">TODO</h1>
+                <p class="product-simple-info">A Simple Todo Creator</p>
             </div>
-            <div class="signUp" v-if="actionType =='signUp'">
+            
+            <div class="action-type">
+                <label><input type="radio" name="type" v-model="actionType" value="signUp">SIGN UP</label>
+                <label><input type="radio" name="type" v-model="actionType" value="login">LOGIN</label>
+            </div>
+            <div class="signUp" v-if="actionType =='signUp'" v-cloak>
                 <form @submit.prevent="signUp">
-                    <div class="formRow">
-                        用户名<input type="text" v-model="formData.username">
-                    </div>
-                    <div class="formRow">
-                        密码<input type="text" v-model="formData.password">
-                    </div>
+                    <!-- <div class="formRow"> -->
+                        <input type="text" placeholder="Username" v-model="formData.username">
+                    <!-- </div> -->
+                    <!-- <div class="formRow"> -->
+                        <input type="text" placeholder="Password" v-model="formData.password">
+                    <!-- </div> -->
                     <div class="formActions">
-                        <input type="submit" value="注册">
+                        <input type="submit" value="Sign Up">
                     </div>
                 </form>
             </div>
             <div class="login" v-if="actionType == 'login'" >
                 <form  @submit.prevent="login">
-                    <div class="formRow">
-                        用户名<input type="text" v-model="formData.username">
-                    </div>
-                    <div class="formRow">
-                        密码<input type="text" v-model="formData.password">
-                    </div>
+                    <!-- <div class="formRow"> -->
+                        <input type="text" placeholder="Username" v-model="formData.username">
+                   <!--  </div> -->
+                    <!-- <div class="formRow"> -->
+                        <input type="text" placeholder="Password" v-model="formData.password">
+                    <!-- </div> -->
                     <div class="formActions">
-                        <input type="submit" value="登录">
+                        <input type="submit" value="Login">
                     </div>
                 </form>
             </div>
         </section>
-        <section id="todo" v-if="currentUser">
-            <p>Hi {{currentUser.username}}!</p>
-            <button v-on:click="logout">登出</button>
+        <section id="todo" v-if="currentUser" v-cloak>
+            <div class="header">
+                <p class="hi-user">Hi {{currentUser.username}}!</p>
+                <button v-on:click="logout" class="logout-button">登出</button>
+                <p class="date-now">{{dateNow}}</p>
+            </div>
             <div class="newTask">
                 <input type="text" v-on:keyup.enter="addTodo" v-model="newTodo">
             </div>
             <ol class="todos">
-                <li v-for="item in todoList" v-cloak>
-                    <input type="checkbox" v-model="item.done">
-                    {{item.title}}{{item.createdTime}}
+                <li class="todo-li" v-for="(item,index) in todoList" v-cloak>
+                    <input type="checkbox" v-model="item.done" v-bind:id="'prefix'+index">
+                    <label v-bind:for="'prefix'+index">
+                        <svg class="icon">
+                            <use xlink:href="#icon-gou"></use>
+                        </svg>
+                    </label>
+                    <span class="todo-index">{{index+1+'.'}}</span>
+                    <span class="todo-content">{{item.title}}</span>
+                    <span class="created-time">created at {{item.createdTime}}</span>
                     <span v-if="item.done">已完成</span>
                     <span v-else>未完成</span>
                     <button v-on:click="removeTodo(item)">×</button>

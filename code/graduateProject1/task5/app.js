@@ -21,22 +21,33 @@ var app = new Vue({
             password:''
         },
         currentUser:null,
+        dateNow:''
     },
     methods:{
         addTodo:function () {
             this.todoList.push({
                 title:this.newTodo,
-                createdTime:new Date(),
+                createdTime:this.setCreatedTime(),
                 done:false
             })
             // console.log(this.todoList)
             this.newTodo = ''
-            this.saveOrUpdateTodos()
+            // this.saveOrUpdateTodos()
+        },
+        setCreatedTime:function () {
+            var time = new Date(),
+                year = time.getFullYear(),
+                month = time.getMonth()+1,
+                day = time.getDate(),
+                hour = time.getHours(),
+                minute = time.getMinutes()
+
+                return  (month+ '/'+ day+'\''+ year +' '+ hour +':'+ minute)
         },
         removeTodo:function (item) {
             let index = this.todoList.indexOf(item)
             this.todoList.splice(index,1)
-            this.saveOrUpdateTodos()
+            // this.saveOrUpdateTodos()
         },
         signUp:function () {
             // 新建 AVUser 对象实例
@@ -57,7 +68,7 @@ var app = new Vue({
             //箭头函数
             AV.User.logIn(this.formData.username, this.formData.password).then((loginedUser)=> {
                 this.currentUser = this.getCurrentUser()
-                this.fetchTodos()
+                // this.fetchTodos()
             }, function (error) {
                 console.log('登录失败')
             });
@@ -128,37 +139,53 @@ var app = new Vue({
                         console.error(error)
                     })
             }
+        },
+        setDateNow:function () {
+            var time = new Date(),
+                year = time.getFullYear(),
+                month = time.getMonth()+1,
+                day = time.getDate(),
+                weekday = time.getDay(),
+                weekdayList = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+                monthList = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."],
+            
+            weekday = weekdayList[weekday]
+            month = monthList[month]
+
+            this.dateNow = weekday + ', '+ day + ' '+ month
         }
     },
     created:function () {
         this.currentUser = this.getCurrentUser()
-        this.fetchTodos()
-        // window.onbeforeunload = ()=>{
-        //     let session = JSON.stringify(this.todoList)
-        //     //localStorage.setItem('myTodos',session)
+        // this.fetchTodos()
+        this.setDateNow()
+
+        window.onbeforeunload = ()=>{
+            let session = JSON.stringify(this.todoList)
+            localStorage.setItem('myTodos',session)
             
-        //     let newTodoSession = JSON.stringify(this.newTodo)
-        //     // localStorage.setItem('myNewTodo',newTodoSession)
+            let newTodoSession = JSON.stringify(this.newTodo)
+            // localStorage.setItem('myNewTodo',newTodoSession)
             
-        //     // var AVTodos = AV.Object.extend('AllTodos')
-        //     // var avTodos = new AVTodos()
-        //     // avTodos.set('content',session)
-        //     // avTodos.save().then(function (todo) {
-        //     //     console.log('保存成功')
-        //     // },function (error) {
-        //     //     console.log('保存失败')
-        //     // });
-        // }
+            // var AVTodos = AV.Object.extend('AllTodos')
+            // var avTodos = new AVTodos()
+            // avTodos.set('content',session)
+            // avTodos.save().then(function (todo) {
+            //     console.log('保存成功')
+            // },function (error) {
+            //     console.log('保存失败')
+            // });
+        }
         
     
-        // let previousData = JSON.parse(localStorage.getItem('myTodos'))
-        // this.todoList = previousData || []
+        let previousData = JSON.parse(localStorage.getItem('myTodos'))
+        this.todoList = previousData || []
         
-        // if(Array.isArray(previousData)){
-        //     this.todoList = previousData;
-        // }else{
-        //     this.todoList = [];
-        // }
+        if(Array.isArray(previousData)){
+            this.todoList = previousData;
+        }else{
+            this.todoList = [];
+        }
 
         // let previousNewTodo = JSON.parse(localStorage.getItem('myNewTodo'))
         //console.log(typeof previousNewTodo)
