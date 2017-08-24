@@ -322,9 +322,11 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             //箭头函数
             __WEBPACK_IMPORTED_MODULE_1_leancloud_storage___default.a.User.logIn(this.formData.username, this.formData.password).then((loginedUser)=> {
                 this.currentUser = this.getCurrentUser()
+                this.fetchTodos()
             }, function (error) {
                 console.log('登录失败')
             });
+            
         },
         getCurrentUser:function () {
             // console.log(AV.User.current())
@@ -364,7 +366,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         },
         updateTodos:function () {
             let session = JSON.stringify(this.todoList)
-            let avTodos = __WEBPACK_IMPORTED_MODULE_1_leancloud_storage___default.a.Object.createWithoutData('AllTodos',this.todoList.id)
+            let avTodos = __WEBPACK_IMPORTED_MODULE_1_leancloud_storage___default.a.Object.createWithoutData('Todofolder',this.todoList.id)
             avTodos.set('content',session)
             avTodos.save().then(()=>{
                 console.log('更新成功')
@@ -395,24 +397,23 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
     created:function () {
         this.currentUser = this.getCurrentUser()
-        
         this.fetchTodos()
-        window.onbeforeunload = ()=>{
-            let session = JSON.stringify(this.todoList)
-            //localStorage.setItem('myTodos',session)
+        // window.onbeforeunload = ()=>{
+        //     let session = JSON.stringify(this.todoList)
+        //     //localStorage.setItem('myTodos',session)
             
-            let newTodoSession = JSON.stringify(this.newTodo)
-            // localStorage.setItem('myNewTodo',newTodoSession)
+        //     let newTodoSession = JSON.stringify(this.newTodo)
+        //     // localStorage.setItem('myNewTodo',newTodoSession)
             
-            // var AVTodos = AV.Object.extend('AllTodos')
-            // var avTodos = new AVTodos()
-            // avTodos.set('content',session)
-            // avTodos.save().then(function (todo) {
-            //     console.log('保存成功')
-            // },function (error) {
-            //     console.log('保存失败')
-            // });
-        }
+        //     // var AVTodos = AV.Object.extend('AllTodos')
+        //     // var avTodos = new AVTodos()
+        //     // avTodos.set('content',session)
+        //     // avTodos.save().then(function (todo) {
+        //     //     console.log('保存成功')
+        //     // },function (error) {
+        //     //     console.log('保存失败')
+        //     // });
+        // }
         
     
         // let previousData = JSON.parse(localStorage.getItem('myTodos'))
@@ -428,8 +429,6 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         //console.log(typeof previousNewTodo)
         //不加||''，第一次挂了，提示this.todoList.push和splice is not a func
         // this.newTodo = previousNewTodo || ''
-        
-        this.currentUser = this.getCurrentUser()
     }
 })
 
