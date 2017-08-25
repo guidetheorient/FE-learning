@@ -297,7 +297,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             })
             // console.log(this.todoList)
             this.newTodo = ''
-            // this.saveOrUpdateTodos()
+            this.saveOrUpdateTodos()
         },
         setCreatedTime:function () {
             var time = new Date(),
@@ -312,7 +312,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         removeTodo:function (item) {
             let index = this.todoList.indexOf(item)
             this.todoList.splice(index,1)
-            // this.saveOrUpdateTodos()
+            this.saveOrUpdateTodos()
         },
         signUp:function () {
             // 新建 AVUser 对象实例
@@ -321,8 +321,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             user.setUsername(this.formData.username);
             // 设置密码
             user.setPassword(this.formData.password);
-            // 设置邮箱
-            //user.setEmail('tom@leancloud.cn');
+
             user.signUp().then((loginedUser) => {
                this.currentUser = this.getCurrentUser()
             }, function (error) {
@@ -333,7 +332,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             //箭头函数
             __WEBPACK_IMPORTED_MODULE_1_leancloud_storage___default.a.User.logIn(this.formData.username, this.formData.password).then((loginedUser)=> {
                 this.currentUser = this.getCurrentUser()
-                // this.fetchTodos()
+                this.fetchTodos()
             }, function (error) {
                 console.log('登录失败')
             });
@@ -422,35 +421,35 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
     created:function () {
         this.currentUser = this.getCurrentUser()
-        // this.fetchTodos()
+        this.fetchTodos()
         this.setDateNow()
 
-        window.onbeforeunload = ()=>{
-            let session = JSON.stringify(this.todoList)
-            localStorage.setItem('myTodos',session)
+        // window.onbeforeunload = ()=>{
+        //     let session = JSON.stringify(this.todoList)
+        //     localStorage.setItem('myTodos',session)
             
-            let newTodoSession = JSON.stringify(this.newTodo)
-            // localStorage.setItem('myNewTodo',newTodoSession)
+        //     let newTodoSession = JSON.stringify(this.newTodo)
+        //     // localStorage.setItem('myNewTodo',newTodoSession)
             
-            // var AVTodos = AV.Object.extend('AllTodos')
-            // var avTodos = new AVTodos()
-            // avTodos.set('content',session)
-            // avTodos.save().then(function (todo) {
-            //     console.log('保存成功')
-            // },function (error) {
-            //     console.log('保存失败')
-            // });
-        }
+        //     // var AVTodos = AV.Object.extend('AllTodos')
+        //     // var avTodos = new AVTodos()
+        //     // avTodos.set('content',session)
+        //     // avTodos.save().then(function (todo) {
+        //     //     console.log('保存成功')
+        //     // },function (error) {
+        //     //     console.log('保存失败')
+        //     // });
+        // }
         
     
-        let previousData = JSON.parse(localStorage.getItem('myTodos'))
-        this.todoList = previousData || []
+        // let previousData = JSON.parse(localStorage.getItem('myTodos'))
+        // this.todoList = previousData || []
         
-        if(Array.isArray(previousData)){
-            this.todoList = previousData;
-        }else{
-            this.todoList = [];
-        }
+        // if(Array.isArray(previousData)){
+        //     this.todoList = previousData;
+        // }else{
+        //     this.todoList = [];
+        // }
 
         // let previousNewTodo = JSON.parse(localStorage.getItem('myNewTodo'))
         //console.log(typeof previousNewTodo)
