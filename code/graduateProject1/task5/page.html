@@ -14,7 +14,7 @@
             list-style: none;
         }
         html,body{
-            background-color: #60CDF6;
+            background-image: linear-gradient(100deg,#5973EE 0,#4184F5 50%,#2D93FA 100%);
             color:#fff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             font-weight: 600;
@@ -41,6 +41,7 @@
         }
         .action-type > label{
             margin-right: 10px;
+            cursor: pointer;
         }
         .action-type > label > input{
             display: none;
@@ -74,12 +75,13 @@
         .formActions>input[type="submit"],
         .logout-button{
             padding: 10px;
-            background-color: #009BD0;
+            background-color:   #4169E1;
             color: #fff;
             border:1px solid transparent;
             border-radius: 4px;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 300;
+            cursor: pointer;
         }
         .formActions>input[type="submit"]{
             width: 250px;
@@ -94,7 +96,7 @@
             top: -14px;
             border:7px solid transparent;
             border-bottom: 10px solid #fff;
-            transition:all 0.8s
+            transition: .8s;
         }
         .login:before{
             left: 80px;
@@ -103,7 +105,6 @@
             left: 18px;
         }
         #todo{
-            /*min-width: 600px;*/
             width: 100%;
             height: 100%;
             overflow: auto;
@@ -133,6 +134,7 @@
         #todo .todo-li{
             height: 50px;
             border-bottom: 1px solid #ccc;
+            position: relative;
         }
         .todo-li input[type="checkbox"]{
             display: none;
@@ -140,17 +142,17 @@
         .todo-li input[type="checkbox"]+label{
             display: inline-block;
             background-color: #fff;
-            border: 1px solid #666;
+            border: 0.5px solid #ccc;
             border-radius: 3px;
             vertical-align: middle;
         }
         .newTask input[type="text"]{
             display: block;
-            padding: 10px;
+            padding: 15px;
             width: 100%;
             border-radius: 4px;
             border: 0.5px solid #ccc;
-            font-size: 20px;
+            font-size: 18px;
             overflow: hidden;
             color: #333;
             vertical-align: middle;
@@ -161,23 +163,32 @@
            vertical-align: -0.15em;
            fill: #009BD0;
            overflow: hidden;
-           opacity: 0
+        }
+        .todo-li input[type="checkbox"]+label .icon{
+            cursor: pointer;
+            opacity: 0;
         }
         .todo-li input[type="checkbox"]:checked+label .icon{
-            opacity: 1
+            opacity: 1;
         }
         .todo-index{
+            margin: 0 0 0 10px;
+            width: 30px;
             font-size: 20px;
             font-weight: 200;
-            margin: 0 20px 0 10px;
-            vertical-align: middle;
+            display: inline-block;
         }
         .todo-content{
             font-size: 18px;
             font-weight: 500;
         }
+        .todo-content.done{
+            text-decoration: line-through;
+            color: #ddd;
+        }
         .created-time{
-            text-align: right;
+            position: absolute;
+            right: 50px;
             font-size: 16px;
             font-weight: 200;
         }
@@ -185,8 +196,30 @@
             line-height: 50px;
             vertical-align: middle;
         }
+        .remove-todo-button{
+            float: right;
+            height: 50px;
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+            background: transparent;
+            border:1px solid transparent;
+            cursor: pointer;
+        }
+        .remove-todo-button .icon{
+            fill:transparent;
+            transition: .5s
+        }
+        .clearfix:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .todo-li:hover .remove-todo-button .icon{
+            fill:#fff;
+        }
     </style>
-    <script src="https://at.alicdn.com/t/font_391266_jhll33e7q8t49529.js
+    <script src="https://at.alicdn.com/t/font_391266_knjlfm17n26v42t9.js
 "></script>
   </head>
   <body>
@@ -203,12 +236,8 @@
             </div>
             <div class="signUp" v-if="actionType =='signUp'" v-cloak>
                 <form @submit.prevent="signUp">
-                    <!-- <div class="formRow"> -->
                         <input type="text" placeholder="Username" v-model="formData.username">
-                    <!-- </div> -->
-                    <!-- <div class="formRow"> -->
                         <input type="text" placeholder="Password" v-model="formData.password">
-                    <!-- </div> -->
                     <div class="formActions">
                         <input type="submit" value="Sign Up">
                     </div>
@@ -216,12 +245,8 @@
             </div>
             <div class="login" v-if="actionType == 'login'" >
                 <form  @submit.prevent="login">
-                    <!-- <div class="formRow"> -->
                         <input type="text" placeholder="Username" v-model="formData.username">
-                   <!--  </div> -->
-                    <!-- <div class="formRow"> -->
                         <input type="text" placeholder="Password" v-model="formData.password">
-                    <!-- </div> -->
                     <div class="formActions">
                         <input type="submit" value="Login">
                     </div>
@@ -231,14 +256,14 @@
         <section id="todo" v-if="currentUser" v-cloak>
             <div class="header">
                 <p class="hi-user">Hi {{currentUser.username}}!</p>
-                <button v-on:click="logout" class="logout-button">登出</button>
+                <button v-on:click="logout" class="logout-button">Log Out</button>
                 <p class="date-now">{{dateNow}}</p>
             </div>
             <div class="newTask">
-                <input type="text" v-on:keyup.enter="addTodo" v-model="newTodo">
+                <input type="text" v-on:keyup.enter="addTodo" v-model="newTodo" placeholder="input your todos and press 'Enter' to save" >
             </div>
             <ol class="todos">
-                <li class="todo-li" v-for="(item,index) in todoList" v-cloak>
+                <li class="todo-li clearfix" v-for="(item,index) in todoList" v-cloak>
                     <input type="checkbox" v-model="item.done" v-bind:id="'prefix'+index">
                     <label v-bind:for="'prefix'+index">
                         <svg class="icon">
@@ -246,11 +271,15 @@
                         </svg>
                     </label>
                     <span class="todo-index">{{index+1+'.'}}</span>
-                    <span class="todo-content">{{item.title}}</span>
+                    <span class="todo-content" v-bind:class="{done:item.done}">{{item.title}}</span>
                     <span class="created-time">created at {{item.createdTime}}</span>
-                    <span v-if="item.done">已完成</span>
-                    <span v-else>未完成</span>
-                    <button v-on:click="removeTodo(item)">×</button>
+                    <!-- <span v-if="item.done">已完成</span>
+                    <span v-else>未完成</span> -->
+                    <button class="remove-todo-button" v-on:click="removeTodo(item)">
+                        <svg class="icon">
+                            <use xlink:href="#icon-chacha"></use>
+                        </svg>
+                    </button>
                 </li>
             </ol>
         </section>
