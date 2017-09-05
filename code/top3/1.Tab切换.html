@@ -101,9 +101,8 @@
       
       //状态锁
       var done = true
-
-      this.header.forEach(function(headerLi){
-        headerLi.addEventListener('click',function (e) {
+      for(let i=0; i<this.header.length;i++){
+        this.header[i].addEventListener('click',function (e) {
           if(!done){
             return
           }
@@ -112,9 +111,13 @@
           //获取点击tab的序号
           var index = [].indexOf.call(_this.header,target)
 
-          _this.header.forEach(function(headerLi){
-            headerLi.classList.remove('active')
-          })
+          //选中的header li加上class
+          //猎豹里面竟然没有NodeList.prototype.forEach方法
+          // _this.header.forEach(function(headerLi){
+          for(let i=0; i<_this.header.length;i++){
+            _this.header[i].classList.remove('active')
+          }
+          // )
           target.classList.add('active')
 
           var contentCt = _this.content[0].parentElement
@@ -137,7 +140,44 @@
             done = true
           },30)
         })
-      })
+      }
+      // this.header.forEach(function(headerLi){
+      //   headerLi.addEventListener('click',function (e) {
+      //     if(!done){
+      //       return
+      //     }
+      //     done = false
+      //     var target = e.target
+      //     //获取点击tab的序号
+      //     var index = [].indexOf.call(_this.header,target)
+
+      //     //选中的header li加上class
+      //     _this.header.forEach(function(headerLi){
+      //       headerLi.classList.remove('active')
+      //     })
+      //     target.classList.add('active')
+
+      //     var contentCt = _this.content[0].parentElement
+
+      //     //无动画
+      //     //contentCt.style.left = -450*index+'px'
+          
+      //     var left = parseInt(contentCt.style.left) || 0
+      //     var interval = Math.abs(-450*index-left)
+      //     setTimeout(function(){
+      //       if(left > -450*index){
+      //         left -= interval/10
+      //       } else if(left < -450*index) {
+      //         left += interval/10
+      //       }
+      //       contentCt.style.left = left + 'px'
+      //       if (left != -450*index){
+      //         setTimeout(arguments.callee,30)
+      //       }
+      //       done = true
+      //     },30)
+      //   })
+      // })
     }
 
     new Tab(document.querySelectorAll('.ct')[0])

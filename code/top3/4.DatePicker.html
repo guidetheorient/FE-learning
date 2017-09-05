@@ -89,7 +89,7 @@
 <body>
     <input class="input-date" type='text' placeholder="" date-init= '2016/05/31'>
     <input class="input-date" type='text' placeholder="">
-<!--     <div class="date-picker">
+<!--<div class="date-picker">
         <div class="header">
             <div class="month clearfix">
                 <span class="caret-left pre"></span>
@@ -166,6 +166,7 @@
             this.bind()
         }
 
+        //$target是否有自定义时间date-init属性
         DatePicker.prototype.init = function ($target) {
             this.$target = $target
             if(this.isValidDate($target.attr('date-init'))){
@@ -176,7 +177,8 @@
                 this.watchDate = new Date()
             }
         }
-
+        
+        //生成日历标题，包括年月+星期一~日
         DatePicker.prototype.render = function () {
             var template = `<div class="date-picker">
                                 <div class="header">
@@ -214,9 +216,9 @@
 
             var firstDay = this.getFirstDay(this.watchDate),
                 lastDay = this.getLastDay(this.watchDate);
-
             var dataArr = []
 
+            //当月1号之前的空缺，最后一天之后的空缺，以及中间的天数
             for(var i = firstDay.getDay();i>0;i--){
                 var d = new Date(firstDay.getTime() - i*1000*60*60*24)
                 dataArr.push({type:'pre',date:d})
@@ -232,6 +234,7 @@
                 dataArr.push({type:'next',date:d})
             }
 
+            //标题年月
             this.$datePicker.find('.header-date').text(this.watchDate.getFullYear()+'年'+(this.watchDate.getMonth()+1)+'月')
 
             var template = ''
@@ -290,8 +293,9 @@
             })
         }
 
-        //什么比较方式
+        //date-init给的是不是时间（这个不太精确，随便给个数字也可以）
         DatePicker.prototype.isValidDate = function (date) {
+            console.log(new Date(date).toString() != 'Invalid Date')
             return new Date(date).toString() != 'Invalid Date'
         }
         DatePicker.prototype.getFirstDay = function (date) {
