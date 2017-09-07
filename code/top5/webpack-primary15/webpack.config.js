@@ -12,7 +12,7 @@ module.exports = {
   entry: './src/js/main.js',
   output: {
     path: __dirname + "/dist", //输出目录
-    filename: "js/_main.js" //输出文件名
+    filename: "js/main_1.js" //输出文件名
   },
   plugins: [
     new WebpackNotifierPlugin({
@@ -20,7 +20,7 @@ module.exports = {
       alwaysNotify: true
     }),
     new ExtractTextPlugin({
-      filename: "css/_main.css",
+      filename: "css/main_1.css",
       disable: false,
       allChunks: true
     }),
