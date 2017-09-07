@@ -29,7 +29,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "X-MEN",
       template: __dirname + "/index.html",
-      filename: "_index.html"
+      filename: "index.html"
     })
   ],
   module: {
