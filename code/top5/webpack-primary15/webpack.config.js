@@ -1,7 +1,8 @@
 const WebpackNotifierPlugin = require('webpack-notifier');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const ImageminPlugin = require('imagemin-webpack-plugin').default
+const imageminMozjpeg = require('imagemin-mozjpeg')
 module.exports = {
   devtool: 'source-map', //source-map怎么查看
   devServer: {
@@ -30,6 +31,24 @@ module.exports = {
       title: "X-MEN",
       template: __dirname + "/index.html",
       filename: "index.html"
+    }),
+
+    // Make sure that the plugin is after any plugins that add images
+    new ImageminPlugin({
+      disable: false, // Disable during development
+      pngquant: {
+        quality: '60-70'
+      },
+      plugins: [
+        imageminMozjpeg({
+          quality: 50,
+          progressive: true
+        })
+      ]
+      // jpegtran:{
+      //   arithmetic: '[30,40)', 
+      //   progressive: true
+      // },
     })
   ],
   module: {
