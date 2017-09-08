@@ -37,18 +37,36 @@ module.exports = {
     new ImageminPlugin({
       disable: false, // Disable during development
       pngquant: {
-        quality: '60-70'
+        quality: '40-50'
       },
+      // plugins: [
+      //   imageminMozjpeg({
+      //     quality: 50,
+      //     progressive: true
+      //   })
+      // ]
+      // jpegtran:{
+      //   arithmetic: '[30,40)', 
+      //   progressive: true
+      // },
+    }),
+    new ImageminPlugin({
+      maxFileSize: 100000, // Only apply this one to files equal to or under 100kb
       plugins: [
         imageminMozjpeg({
           quality: 50,
           progressive: true
         })
       ]
-      // jpegtran:{
-      //   arithmetic: '[30,40)', 
-      //   progressive: true
-      // },
+    }),
+    new ImageminPlugin({
+      minFileSize: 100000, // Only apply this one to files over 100kb
+      plugins: [
+        imageminMozjpeg({
+          quality: 25,
+          progressive: true
+        })
+      ]
     })
   ],
   module: {
