@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Modal</title>
+  <style>
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    .msgbox.active {
+      display: block;
+    }
+
+    body.active {
+      background: #ccc;
+    }
+
+    .msgbox {
+      position: absolute;
+      width: 500px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      font-family: 'Microsoft YaHei', 'sans-serif';
+      background: #fff;
+      display: none;
+    }
+
+    .msgbox>div {
+      padding: 0 10px;
+    }
+
+    .msgbox .content {
+      border-bottom: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+    }
+
+    .header .title {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .header .quit1 {
+      float: right;
+      font-size: 25px;
+      line-height: 25px;
+      cursor: pointer;
+    }
+
+    .msgbox .btn {
+      float: right;
+      line-height: 40px;
+    }
+
+    .msgbox .btn>a {
+      padding: 8px;
+    }
+
+    .clearfix:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <button id='btn'>点我</button>
+  <div class="msgbox clearfix">
+    <div class="header clearfix">
+      <h4 class="title">我是标题1</h4>
+      <span class="quit1">×</span>
+    </div>
+    <div class="content">
+      <p>内容1</p>
+      <p>内容1</p>
+    </div>
+    <div class="btn">
+      <a href="#" class="quit">取消</a>
+      <a href="#" class="ok">确定</a>
+    </div>
+  </div>
+  <script>
+    // 1.如果要传参数，使用匿名函数里加函数的方式
+    // 2.主要是阻止modal除关闭按钮之外区域的冒泡
+    var btn = document.getElementById('btn')
+    var modal = document.querySelector('.msgbox')
+    var body = document.querySelector('body')
+    var quit = document.querySelector('.quit')
+    var closeBtn = document.querySelector('.quit1')
+
+    btn.addEventListener('click',function(e){
+      //阻止冒泡到window，还没开就被关了
+      e.stopPropagation()
+      modal.classList.add('active')
+      body.classList.add('active')
+    })
+
+    //modal阻止了所有向上的冒泡，所以quit和closeBtn冒泡不会到window了
+    modal.addEventListener('click',function(e){e.stopPropagation()})
+    quit.addEventListener('click',close)
+    closeBtn.addEventListener('click',close)
+    window.addEventListener('click',close)
+
+    function close(){
+      modal.classList.remove('active')
+      body.classList.remove('active')
+    }
+  </script>
+</body>
+
+</html>
