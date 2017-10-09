@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+</head>
+<body>
+  <script>
+    //1.函数调用
+    function createPerson(name,age){
+      var obj = {
+        name:name,
+        age:age
+      }
+      obj.sayName = function(){
+        return this.name
+      }
+      return obj
+    }
+    // createPerson('小明',21).sayName()   //指向函数返回的对象
+
+    //2.方法调用
+    //将函数赋给另一个变量，t是在全局下的，在哪执行，this指向谁
+    var t = createPerson('小明',21).sayName   //指向window
+    t()
+
+    //3.new
+    //4.apply/call
+
+
+    
+    
+    
+  </script>
+</body>
+</html>

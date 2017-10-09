@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>发布订阅模式</title>
+</head>
+<body>
+  <script>
+    //发布订阅模式  publish/subscribe
+    //比较常用
+    
+    //jquery中的订阅发布模式
+    // $('div').on('click',function(){})
+    // $('header').on('click',function(){
+    //   $('div').trigger('click')
+    // })
+
+    //例：
+    //jquery中自定义组件事件
+    //异步事件
+
+
+    var EventCenter = (function(){
+      var events = {};
+      //on 挂载事件
+      function on(evt,handler){
+        events[evt] = events[evt]||[];
+        //数组，事件+回调
+        events[evt].push({
+          handler:handler
+        });
+      }
+      function fire(evt,args){
+        if(!events[evt]){
+          return;
+        }
+        for(var i=0;i<events[evt].length;i++){
+          events[evt][i].handler(args)
+        }
+      }
+      function off(name){
+        delete events[name]
+      }
+      return {
+        on:on,
+        fire:fire,
+        off:off
+      }
+    })()
+
+
+  </script>
+</body>
+</html>

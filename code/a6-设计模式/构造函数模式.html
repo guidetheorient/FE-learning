@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>构造函数模式</title>
+</head>
+<body>
+  <script>
+    //构造函数模式  constructor
+    //new => 通知浏览器开辟一个新的内存空间
+    //构造函数和工厂模式都是返回新的内存引用，避免同一个引用
+
+    function Person(name,age){
+      this.name = name;
+      this.age = age;
+    }
+    //原型链
+    Person.prototype.sayName = function(){
+      return this.name;
+    }
+    var p1 = new Person("小明",20)
+  </script>
+</body>
+</html>

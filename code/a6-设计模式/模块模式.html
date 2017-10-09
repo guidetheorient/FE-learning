@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>模块模式</title>
+</head>
+<body>
+  <script>
+    //模块模式 module  ==>一个封闭作用域
+    //避免全局变量冲突
+    //闭包
+    
+    var Person = (function(){
+      var name = 'xiaoming';
+      function sayName(){
+        console.log(name)
+      }
+      return {
+        name:name,
+        sayName:sayName
+      }
+    })()
+  </script>
+</body>
+</html>

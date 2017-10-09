@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>单例模式</title>
+</head>
+<body>
+  <script>
+    //例子：dialog，原则上页面上只能出现一个对话框，并且每次出现的是同一个，不要新建一个对象
+    //只是对其中包含的内容进行修改
+
+
+    //单例模式 singleton
+    //不创造新的内存空间
+
+    //匿名函数
+    var People = (function(){
+      var instance;
+      function init(name){
+        return {
+          name:name
+        };
+      }
+      return {
+        createPeople:function(name){
+          if(!instance){
+            instance = init(name);
+          }
+          return instance;
+        }
+      }
+    })();
+
+    //创建之后就不会改变 
+    People.createPeople('jirengu') //{name:'jirengu'}
+    People.createPeople('hello') //{name:'jirengu'}    
+
+    //js的作用域是通过函数来体现的，函数里面的作用域是不会被外界所看到的
+    //模块化，隐藏一些变量
+
+    //词法作用域
+    //js定义了function，function所能访问的是其定义时的上下文
+  </script>
+</body>
+</html>
