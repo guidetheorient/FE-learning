@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul,li,div{
+      margin:0;
+      padding:0;
+      list-style:none;
+      box-sizing:border-box;
+      font-family:'Microsoft YaHei',sans-serif;
+    }
+    a{
+      text-decoration: none;
+      color: #f43043;
+      border:1px solid #f43043;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+    .clearfix:after{
+      content:'';
+      display:block;
+      clear:both;
+    }
+    .content{
+      width: 600px;
+      background: #eee;
+    }
+    .product{
+      float: left;
+      position: relative;
+      width: 30.333333%;
+      margin: 1.5%;
+      padding: 10px;
+      padding-top: 0;
+      background-color: #fff;
+    }
+    .product-info{
+      margin-top: 0;
+      font-size: 12px;
+      height: 35px;
+      overflow: hidden;
+    }
+    .product img{
+      width: 100%;
+    }
+    .price{
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #f43043;
+      font-size: 16px;
+    }
+    .buy{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 100%;
+      height: 100%;
+      background-color: rgba(204,204,204,0);
+      display: none;
+      text-align: center;
+    }
+    .buy:before{
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+    .buy a{
+      display: inline-block;
+      padding:5px 10px;
+    }
+    .buy.hover{
+      background-color: rgba(204,204,204,0.8);
+      display: block;
+    }
+    .ct .content{
+      display: none;
+    }
+    .ct .content.active{
+      display: block;
+    }
+    .add-product{
+      display: block;
+      text-align: center;
+      width: 50px;
+      padding:5px 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content clearfix">
+    <div class="product">
+      <img src="img/surface-pro.jpg" alt="">
+      <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+      <h5 class="price">$ 1</h5>
+    </div>
+    <div class="product">
+      <img src="img/surface-pro.jpg" alt="">
+      <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+      <h5 class="price">$ 1</h5>
+    </div>
+    <div class="product">
+      <img src="img/surface-pro.jpg" alt="">
+      <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+      <h5 class="price">$ 1</h5>
+    </div>
+    <div class="product">
+      <img src="img/surface-pro.jpg" alt="">
+      <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+      <h5 class="price">$ 1</h5>
+    </div>
+    <div class="product">
+      <img src="img/surface-pro.jpg" alt="">
+      <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+      <h5 class="price">$ 1</h5>
+    </div>
+    <div class="product">
+      <img src="img/surface-pro.jpg" alt="">
+      <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+      <h5 class="price">$ 1</h5>
+    </div>
+  </div>
+  <a href="#" class="add-product">添加</a>
+  <script src="jquery-3.2.0.js"></script>
+  <script>
+    var $addProduct = $('.add-product')
+    var $content = $('.content')
+    var $product = $('.product')
+    var products = [
+      {
+        img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+        name: '珂兰 黄金手 猴哥款',
+        price: '$ 405.00'
+      },{
+        img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+        name: '珂兰 黄金转运珠 猴哥款',
+        price: '$ 100.00'
+      },{
+        img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+        name: '珂兰 黄金手链 3D猴哥款',
+        price: '$ 45.00'
+      }
+    ];
+    $addProduct.click(function(){
+      var html =''
+      for(var i=0;i<3;i++){
+        html+='\
+        <div class="product">\
+          <img src="'+products[i].img+'" alt="">\
+          <p class="product-info" title="'+products[i].name+'">'+products[i].name+'</p>\
+          <h5 class="price">'+products[i].price+'</h5>\
+        </div>'
+      }
+      $content.append(html)
+      return false
+    });
+
+    $content.on('mouseenter','.product',function(e){
+      var buy = '<div class="buy hover"><a href="#">买买买</a></div>'
+      $(this).append(buy)
+    }).on('mouseleave','.product',function(){
+      $(this).find('.buy').remove()
+    })
+   //没有on hover这个事件
+   //不过hover为mouseenter和mouseleave的封装
+  </script>
+</body>
+</html>

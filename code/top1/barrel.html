@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barrel</title>
+    <style> 
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .img-preview{
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    .img-row {
+      margin-bottom: 8px;
+    }
+
+    .img-row:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .img-box {
+      float: left;
+    }
+
+    .img-line .img-box:first-child {
+      padding-left: 0;
+    }
+  
+    </style>
+</head>
+<body>
+    <div class="img-preview"></div>
+    <script>
+    function Barrel($ct){
+      this.$ct = $ct;
+      this.rowList = [];
+      this.loadImg();
+    }
+
+    Barrel.prototype = {
+
+      loadImg:function(){
+        var _this = this
+        var imgs = this.getImgUrls(10)
+
+        for(var i=0; i<imgs.length; i++){
+          var img = new Image()
+          img.src = imgs[i]
+          img.onload = function(){
+            var imgInfo = {
+              target:img,
+              width: 200 * img.width/img.height,
+              height: 200
+            };
+            _this.render(img);
+          }
+        }
+      },
+      rendor: function(imgInfo){
+        
+      },
+      getImgUrls:function(num){
+        var color, width, height, urls = [];
+        for(var i = 0; i < num; i++){
+          color = Math.random().toString(16).substring(2,8);
+          width = Math.floor(Math.random() * 100 + 50);
+          height = Math.floor(Math.random() * 30 + 50);
+          urls.push("http://placehold.it/" + width + "x" + height + "/" + color + "#fff")
+        }
+        return urls
+      }
+    }
+
+      new Barrel('$.img-preview')
+    </script>
+</body>
+</html>

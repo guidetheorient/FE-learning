@@ -1,0 +1,43 @@
+<script>
+  var hQuery = function(selector,context){
+    return new hQuery.prototype.init(selector,context)
+  }
+  hQuery.prototype = {
+    constructor:jQuery,
+    init:function(selector,context){
+      console.log(this);
+      return this
+    },
+    // sayHello:function(){
+    //   console.log('hello world')
+    // }
+  }
+
+  hQuery.prototype.init.prototype = hQuery.prototype
+  window.hQuery = window.$ = hQuery
+
+  //添加公共方法，就是将其添加到新对象上的prototype上，像$().addClass
+  //添加静态方法，就是将其添加到hQuery函数上,如$.ajax()
+  
+  //谁点一个函数，this就指向谁
+  //hQuery.extend(),this指向hQuery
+  //hQuery.prototype.extend(),指向hQuery.prototype
+  hQuery.extend = hQuery.prototype.extend = function(obj){
+    for(var key in value){
+      this[key] = obj[key]
+    }
+  }
+
+  hQuery.extend({
+    isArray:Array.isArray,
+    ajax:function(){}
+  })
+
+
+  hQuery.prototype.extend({
+    addClass:function(){console.log('add Class')},
+    sayHello:function(){console.log('hello '+this.selector)}
+  })
+
+  $().sayHello
+</script>

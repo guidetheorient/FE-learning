@@ -1,0 +1,50 @@
+<script>
+  class Promise {
+    constructor() {
+      this.callbacks = []
+    }
+    then(onsuccess, onfail) {
+      this.callbacks.push({
+        resolve: onsuccess,
+        reject: onfail
+      })
+      return this
+    }
+    resolve(result) {
+      this.complete('resolve',result)
+    }
+    reject(result) {
+      this.complete('reject',result)
+    }
+    complete(type,result) {
+      var callback = this.callbacks.shift()
+      callback[type](result)
+    }
+  }
+
+  var p = new Promise()
+
+  function fn() {
+    setTimeout(function () {
+      p.resolve('data1')
+    }, 1000)
+    return p
+  }
+
+  function fn1(result) {
+    console.log('fn1', result)
+    setTimeout(function () {
+      p.resolve('data2')
+    }, 1000)
+  }
+
+  function fn2(result) {
+    console.log('fn2', result)
+  }
+  
+  //then只是将函数存在数组里，前一个函数按照处理结果调用里面的函数
+  fn().then(fn1).then(fn2)
+  
+  // fn()
+
+</script>

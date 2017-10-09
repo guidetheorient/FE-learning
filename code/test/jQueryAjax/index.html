@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p id="container"></p>
+	<input type="text" id='music-name'>
+	<button id="btn">获取</button>
+	<script src="jquery-3.2.0.js"></script>
+  <script>
+  $('#btn').on('click',function(){
+    var musicName = $('#music-name').val()
+    $.get('/getMusic',{
+     name: musicName 
+    },function(data){
+      $('#container').text(data)
+      console.log(data.type)
+    })
+  })
+    
+
+
+
+  	// $('#btn').addEventListener('click',function(){
+  	// 	var musicName = $('#music-name').value
+  	// 	var xhr = new XMLHttpRequest()
+  	// 	xhr.open('get','/getMusic?name='+musicName,true)
+  	// 	xhr.send()
+  	// 	xhr.onreadystatechange = function(){
+  	// 		if(xhr.readyState === 4 && xhr.status === 200|xhr.status === 304){
+  	// 			$('#container').innerText = xhr.responseText
+  	// 			console.log(xhr.responseText)
+  	// 		}
+  	// 	}
+  	// })
+
+    // $.ajax({
+    //         url:'/hello',
+    //         method:'get',
+    //         dataType:'json',
+    //         data:{
+    //             a:1,
+    //             b:2
+    //         },
+    //         success:function(ret){
+    //             console.log(ret)
+    //         },
+    //         error:function(){
+
+    //         }
+    //     })
+
+    //     $.ajax({
+    //         url:'hello',
+    //         method:'post',
+    //         dataType:'json',
+    //         data:{
+    //             a:1,
+    //             b:2
+    //         }
+    //     }).done(function(){
+
+    //     }).error(function(){
+
+    //     })
+
+    //     $.get('/hello',{}).done(function(ret){
+
+    //     })
+
+		// function $(id){
+		// 	return document.querySelector(id)
+		// }
+	</script>
+</body>
+</html>

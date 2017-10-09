@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>postMessage</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+      }
+    </style>
+</head>
+<body>
+	<ul class="ct">
+	  <input type="text" placeholder="http://b.jrg.com:8080/b.html">
+	</ul>
+  <script>
+    var input = $('.ct input')
+    input.addEventListener('input',function(e){
+      window.parent.postMessage(e.target.value,'http://a.jrg.com:8080')
+    })
+
+    window.addEventListener('message',function (e) {
+      input.value = e.data
+    })
+
+    function $(element){
+      return document.querySelector(element)
+    }
+  </script>
+</body>
+</html>

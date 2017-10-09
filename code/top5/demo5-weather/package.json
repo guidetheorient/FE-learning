@@ -1,0 +1,18 @@
+{
+  "name": "demo5-weather",
+  "version": "1.0.4",
+  "description": "''\u001b[Dweather forcast\u001b[D\u001b[D\u001b[D\u001b[Decast\u001b[2~\u001b[Dss\u001b[2~ss\u001b[D\u001bt\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "weather":"node index.js"
+  },
+  "bin": {
+    "weather": "./index.js"
+  },
+  "author": "guidetheorient",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}

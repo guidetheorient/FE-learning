@@ -1,0 +1,15 @@
+// // const greet = require('./Greeter')
+// import React from 'react'
+// import {render} from 'react-dom'
+// import Greeter from './Greeter'
+
+// // document.querySelector("#root").appendChild(greet())
+
+// render(<Greeter />,document.getElementById('root'))
+
+// main.js
+import React from 'react';
+import {render} from 'react-dom';
+import Greeter from './Greeter';
+
+render(<Greeter />, document.getElementById('root'));

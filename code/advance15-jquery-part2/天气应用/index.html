@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+	</style>
+</head>
+<body>
+	<ul class="ct">
+		<li id="city">内容1</li>
+		<li id="weather">内容2</li>
+	</ul>
+	<script src="jquery-3.2.0.js"></script>
+	<script>
+		var $city = $('#city')
+		var $weather = $('#weather')
+
+		$.get('http://jirenguapi.applinzi.com/city.php',
+			function(data,textStatus){
+			console.log(data)
+		})
+		$.get('http://jirenguapi.applinzi.com/weather.php?city=北京',
+			function(data,textStatus){
+			console.log(data.results)
+		},'json')
+	</script>
+</body>
+</html>

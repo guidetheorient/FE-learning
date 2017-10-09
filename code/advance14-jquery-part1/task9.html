@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul,li,div{
+      margin:0;
+      padding:0;
+      list-style:none;
+      box-sizing:border-box;
+      font-family:'Microsoft YaHei',sans-serif;
+    }
+    a{
+      text-decoration: none;
+      color: #f43043;
+    }
+    .header li{
+      float:left;
+      padding:8px 10px;
+      text-align:center;
+      background-color: #28292D;
+      color: #eee;
+      font-size: 14px;
+      cursor:pointer;
+    }
+    .header li:last-child{
+      border-right:1px solid #ccc;
+    }
+    .header li:hover{
+      background-color: #777;
+    }
+    .clearfix:after{
+      content:'';
+      display:block;
+      clear:both;
+    }
+    .content{
+      width: 600px;
+      background: #eee;
+    }
+    .product{
+      float: left;
+      position: relative;
+      width: 30.333333%;
+      margin: 1.5%;
+      padding: 10px;
+      padding-top: 0;
+      background-color: #fff;
+    }
+    .product-info{
+      margin-top: 0;
+      font-size: 12px;
+      height: 35px;
+      overflow: hidden;
+    }
+    .product img{
+      width: 100%;
+    }
+    .price{
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #f43043;
+      font-size: 16px;
+    }
+    .buy{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 100%;
+      height: 100%;
+      background-color: rgba(204,204,204,0);
+      display: none;
+      text-align: center;
+    }
+    .buy:before{
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+    .buy a{
+      display: inline-block;
+      padding:5px 10px;
+      border:1px solid #f43043;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+    .buy.hover{
+      background-color: rgba(204,204,204,0.8);
+      display: block;
+    }
+    .ct .content{
+      display: none;
+    }
+    .ct .content.active{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="ct">
+    <ul class="header clearfix">
+      <li>Surface Pro</li>
+      <li>Surface Laptop</li>
+      <li>Surface Book</li>
+    </ul>
+    <div class="content active clearfix">
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+    </div>
+    <div class="content clearfix">
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+    </div>
+    <div class="content clearfix">
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+    </div>
+  </div>
+  <div class="ct">
+    <ul class="header clearfix">
+      <li>Surface Pro</li>
+      <li>Surface Laptop</li>
+      <li>Surface Book</li>
+    </ul>
+    <div class="content active clearfix">
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-pro.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）">微软（Microsoft）Surface Pro 二合一平板电脑 12.3英寸（Intel Core M3 4G内存 128G存储 ）</p>
+        <h5 class="price">$ 1</h5>
+      </div>
+    </div>
+    <div class="content clearfix">
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-laptop.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金">微软（Microsoft）Surface Laptop （Intel i5 4G内存 128G存储） 亮铂金</p>
+        <h5 class="price">$ 2</h5>
+      </div>
+    </div>
+    <div class="content clearfix">
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+      <div class="product">
+        <img src="img/surface-book.jpg" alt="">
+        <p class="product-info" title="微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色">微软（Microsoft）Surface Book 二合一平板笔记本 13.5英寸（Intel i5 8G内存 128G存储）银色</p>
+        <h5 class="price">$ 3</h5>
+      </div>
+    </div>
+  </div>
+  <script src="jquery-3.2.0.js"></script>
+  <script>
+    var $header = $('.header')
+    var $product = $('.product')
+    $header.click(function(e){
+      var headerIndex = $header.index(this)  //index前面是集合，后面是特定元素
+      var $content = $header.eq(headerIndex).siblings('.content')
+      var contentIndex = $(e.target).index()
+      $content.removeClass('active').eq(contentIndex).addClass('active')
+    });
+
+    var html = '<div class="buy"><a href="#">买买买</a></div>'
+    $product.append(html)
+    $product.hover(function() {
+      $(this).find('.buy').addClass('hover')
+    }, function() {
+      $(this).find('.buy').removeClass('hover')
+    });
+  </script>
+</body>
+</html>

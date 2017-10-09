@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lazyload</title>
+    <style>
+        img{
+            display: block;
+            height: 200px;
+            margin: 5px auto;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        //放置占位符
+        var img =''
+        for(var i=0;i<20;i++){
+            img += '<img src="http://fakeimg.pl/300x200/" data-src="https://unsplash.it/300/200?image='+ i +'">'  //错误1，少加了一个分号，log到怀疑人生
+        }
+        $('body').append(img)
+        
+        //页面刚加载时load一次
+        //每次都是全部加载了，log到。。，原来img没设置高度
+        lazyLoad();
+        
+        //页面滚动时load一次
+        $(window).scroll(function(){
+            lazyLoad();
+        })
+
+        //占位符在页面内，并且未被加载过图片，加载图片
+        function lazyLoad(){
+            $('img').each(function(){
+                if(isVisible($(this))&&!isLoaded($(this))){
+                    loadImg($(this))
+                }
+            })
+        }
+
+        function isVisible($node){
+            var scrollTop = $(window).scrollTop()
+            var windowHeight = $(window).height()
+            var offsetTop = $node.offset().top
+            if(offsetTop < windowHeight + scrollTop&&offsetTop > scrollTop){
+                return true
+            }
+        }
+        function isLoaded($node){
+            if($node.attr('src') === $node.attr('data-src')){
+                return true
+            }
+            return false
+        }
+        function loadImg($node){
+            $node.attr('src',$node.attr('data-src'))
+        }
+    </script>
+</body>
+</html>

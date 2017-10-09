@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>进阶15</title>
+</head>
+<body>
+    <script src="../advance14-jquery-part1/jquery-3.2.0.js"></script>
+    <script>
+        $.ajax({
+            url:'/hello',
+            method:'get',
+            dataType:'json',
+            data:{
+                a:1,
+                b:2
+            },
+            success:function(ret){
+                console.log(ret)
+            },
+            error:function(){
+
+            }
+        })
+
+        $.ajax({
+            url:'hello',
+            method:'post',
+            dataType:'json',
+            data:{
+                a:1,
+                b:2
+            }
+        }).done(function(){
+
+        }).error(function(){
+
+        })
+
+        $.get('/hello',{}).done(function(ret){
+
+        })
+
+        
+    </script>
+</body>
+</html>

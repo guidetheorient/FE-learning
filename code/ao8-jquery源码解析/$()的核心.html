@@ -1,0 +1,25 @@
+<script src="./jquery-3.2.0.js"></script>
+<script>
+  var hQuery = function(selector,context){
+    return new hQuery.prototype.init(selector,context)
+  }
+  hQuery.prototype = {
+    constructor:jQuery,
+    init:function(selector,context){
+      console.log(this);
+      return this
+    },
+    sayHello:function(){
+      console.log('hello world')
+    }
+  }
+
+  hQuery.prototype.init.prototype = hQuery.prototype
+  window.hQuery = window.$ = hQuery
+
+  $().sayHello
+
+  //为什么不直接构造函数生成不同的对象呢，也可以共用方法
+  //因为这样还是不能使用直接运行函数$()的方式创建对象，而是
+  //每次都要new
+</script>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p id="container"></p>
+	<input type="text" id='music-name'>
+	<button id="btn">获取</button>
+
+	<textarea id="article" cols="30" rows="10"></textarea>
+	<button id="btn2">提交文章</button>
+	<script>
+  	$('#btn').addEventListener('click',function(){
+  		var musicName = $('#music-name').value
+  		var xhr = new XMLHttpRequest()
+  		xhr.open('get','/getMusic?name='+musicName,true)
+  		xhr.send()
+  		xhr.onreadystatechange = function(){
+  			if(xhr.readyState === 4 && xhr.status === 200|xhr.status === 304){
+  				$('#container').innerText = xhr.responseText
+  				console.log(xhr.responseText)
+  			}
+  		}
+  	})
+
+  	$('#btn2').addEventListener('click',function(){
+  		var article = $('#article').value
+  		var xhr = new XMLHttpRequest()
+  		xhr.open('post','/postArticle',true)
+  		xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+  		xhr.send('article='+article)
+  		xhr.onreadystatechange = function(){
+  			if(xhr.readyState===4 &&xhr.status===200|xhr.status === 304){
+  				$('#container').innerText=xhr.responseText
+  				console.log(xhr.responseText)
+  			}
+  		}
+  	})
+
+		function $(id){
+			return document.querySelector(id)
+		}
+	</script>
+</body>
+</html>

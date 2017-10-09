@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+	      font-family: 'DengXian';
+	    }
+	    #load-more{
+	      text-decoration:none;
+	      display:block;
+	      margin:0 auto;
+	      padding:8px 2px;
+	      text-align:center;
+	      width:80px;
+	      border:1px solid #1e88e5;
+	      color:#666;
+	      font-size:16px;
+	      border-radius: 3px;
+	    }
+	    /*注意loading.gif背景色透明或与a链接背景色一致*/
+	    #load-more.click{
+	      background:url(loading.gif) center no-repeat ;
+	      background-size:contain;
+	    }
+	    /*‘a’链接中换成loading图片时，没有文字，需要被撑开*/
+	    #load-more.click:before{
+	    	content: '';
+	    	height: 17px;
+	    	display: block;
+	    }
+	    .ct{
+	      margin:10px;
+	      padding:0;
+	    }
+	    .ct li{
+	      list-style:none;
+	      padding:20px;
+	      margin: 10px;
+	      background:#eee;
+	      border-radius:3px;
+	    }
+	    .ct li:hover{
+	    	background:blue;
+	    	color:#fff;
+	    }
+	    /*注意优先级，不加li优先级<前面的.ct li*/
+	    /*li.hover{
+	    	background: blue;
+	    }*/
+	</style>
+</head>
+<body>
+	<ul class="ct">
+		<li>内容1</li>
+		<li>内容2</li>
+	</ul>
+	<a href="#" class="btn" id="load-more">加载更多</a>
+	<script>
+		var btn = document.querySelector('#load-more')
+		var ct = document.querySelector('.ct')
+		//设置一个状态，第一次点击响应前忽略再次点击
+		var done = true
+		//1.可以直接用伪类:hover
+		//2.事件代理
+		// ct.addEventListener('mouseover',function(e){
+		// 	if(e.target.nodeName.toLowerCase()=='li'){
+		// 		e.target.classList.add('hover')
+		// 	}
+		// })
+		// ct.addEventListener('mouseout', function(e){
+		// 	if(e.target.nodeName.toLowerCase()=='li'){
+		// 		e.target.classList.remove('hover')
+		// 	}
+		// })
+		btn.addEventListener('click',function(e){
+			//阻止a链接默认事件
+			e.preventDefault()
+			var index = ct.children.length+1;
+			//XMLHttpRequest
+			var xhr = new XMLHttpRequest()
+			if(!done){
+				return
+			}
+			btn.innerText=''
+			btn.classList.add('click')
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState === 4){
+					if(xhr.status===200 || xhr.status===304){
+						var content = JSON.parse(xhr.responseText)
+						var html = document.createDocumentFragment()
+						for(var i=0;i<content.length;i++){
+							var li = document.createElement('li')
+							li.innerText = content[i]
+							html.appendChild(li)
+						}
+						btn.innerText='加载更多'
+						btn.classList.remove('click')
+						ct.appendChild(html)
+					}else{
+						console.log('出错')
+					}
+				    done = true
+				}
+			}
+			xhr.open('get','/loadMore?index='+index+'&length=5',true)
+			xhr.send()
+			done =false
+		})
+	</script>
+</body>
+</html>
+
+<!-- 
+1.get
+2.我提供index和length
+3.我需要得到数组[新闻1 新闻2 新闻3....]
+ -->

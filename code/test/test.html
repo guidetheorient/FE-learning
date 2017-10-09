@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		a{
+			list-style: none;
+		}
+		#ct1,#ct3{
+			height: 900px
+		}
+	</style>
+</head>
+<body>
+	<div id = 'ct1' data-appId = 'haha'>11
+		<div id="ct2">  22
+			<p>1</p>33
+			<p>2</p>
+			<p>3</p>
+			<img src="" alt="" name='haha'>
+			<img src="" alt="" name="haha">
+		</div>
+	</div>
+	<div id="ct3">11111</div>
+	<a href="#" onclick="console.log(1)">11</a>
+	<script>
+		console.log(document.hasFocus())
+		var element = document.createElement('div')
+		element.className = 'message'
+		var textNode = document.createComment('hi man')
+		element.appendChild(textNode)
+		var another = document.createComment('bye guys')
+		element.appendChild(another)
+		document.body.appendChild(element)
+		console.log(element.childNodes.length)
+		element.normalize()
+		console.log(element.childNodes.length)
+
+		function convertToArray(node){
+			try{
+				Array.prototype.slice.call(node.childNodes,0)
+			}catch(e){
+				var array = []
+				var len = node.length
+				for(var i = 0; i < len; i++){
+					array.push(node[i])
+				}
+			}
+			return array
+		}
+		function $(node){
+			return document.querySelector(node)
+		}
+		function loadStyles(url){
+			var link = document.createElement('link')
+			var head = document.getElementsByTagName('head')[0]
+			link.href = url
+			link.rel = 'stylesheet'
+			link.type = 'text/css'
+			head.appendChild(link)
+		}
+		var table = document.createElement('table')
+		table.border = 1
+		table.insertRow(0)
+		table.rows[0].insertCell(0)
+		table.rows[0].cells[0].appendChild(document.createTextNode('cell 1,1'))
+		document.body.appendChild(table)
+	</script>
+</body>
+</html>

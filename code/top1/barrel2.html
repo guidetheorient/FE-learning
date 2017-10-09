@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>木桶布局</title>
+  <style>
+    .ct{
+      width: 960px;
+      margin: 0 auto;
+      /*border: 1px solid #000;*/
+    }
+    .img-row{
+      margin-bottom: 10px;
+    }
+    .img-row:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .img-row>div.img{
+      float: left;
+      height: 200px;
+      /*margin-left: 5px;*/
+    }
+/*    div.img:first-child{
+      margin-left: 0;
+    }*/
+  </style>
+</head>
+<body>
+  <div class="ct">
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+  //获取url
+  //生成
+  //遍历图片，将每张图片放在某行计算是否超出
+  //放置图片
+    function Barrel(){
+      this.imgList = []
+      this.$ct = $('.ct')
+      this.loadImg()
+    }
+
+    Barrel.prototype = {
+      getImage:function(num){
+        var width,height,color,urls = []
+        for(var i= 0;i< num;i++){
+          height = parseInt(Math.random()*100+50)
+          width = parseInt(Math.random()*100+50)
+          color = Math.random().toString(16).substring(2,8)
+          urls.push('http://fakeimg.pl/'+width+'x'+height+'/'+color+',128/000,255')
+        }
+        return urls
+      },
+
+      loadImg:function(){
+        var _this = this
+        var imgurls = this.getImage(10)
+        var imgRowWidth = 0
+        var ctWidth = $('.ct').width()
+
+        $.each(imgurls,function(index, el) {
+          var img = new Image()
+          img.src = el
+          img.onload = function(){  //onload不是jquery方法
+            _this.imgList.push(img)
+            img.width = 100*img.width/img.height
+            img.height = 100
+            imgRowWidth += img.width
+
+            if(imgRowWidth > ctWidth){
+              _this.imgList.pop()
+              ratio = ctWidth/(imgRowWidth-img.width)
+              _this.layout()
+
+              console.log()
+              //imgRowWidth = img.width
+              _this.imgList = []
+              //_this.imgList.push(img)
+            }
+          }
+          imgRowWidth = img.width
+          _this.imgList.push(img)
+        })
+      },
+
+      layout:function(){
+        var _this = this
+        // console.log('1')
+        this.$ct.append('<div class="img-row"></div>')
+        var $imgRow = $('.img-row').last()
+        $.each(this.imgList,function(index,el){
+          el.height *= ratio
+          el.width *= ratio
+          $imgRow.append(el)
+        })
+
+        if($('.ct').height() < $(window).height()){
+          // getImage(10)
+          this.loadImg()
+        }
+      }
+    }
+
+    new Barrel()
+  </script>
+</body>
+</html>

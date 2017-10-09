@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CORS</title>
+    <style>
+      body{
+        font-family:'Dengxian','sans-serif';
+      }
+    </style>
+</head>
+<body>
+	<ul class="ct">
+		<li>0</li>
+		<li>0</li>
+		<li>0</li>
+	</ul>
+	<button id='getNews'>get news</button>
+	<script>
+		//假设本域为localhost:8080   请求的域为b.jrg.com
+		var ct = $('.ct')
+		var btn = $('#getNews')
+		btn.addEventListener('click',function(){
+			var xhr = new XMLHttpRequest()
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4){
+					if(xhr.status >= 200 && xhr.status <300 || xhr.status == 304){
+						getNews(xhr.responseText)
+					}
+				}
+			}
+			//注意localhost端口是8080啊，要加上，不然默认是80
+			xhr.open('get','http://b.jrg.com:8080/getNews',true)
+			xhr.send(null)
+
+		})
+
+		function getNews(data){
+			var data = JSON.parse(data)
+			var news = document.createDocumentFragment()
+			for(var i=0;i<data.length;i++){
+				var li = document.createElement('li')
+				li.innerText = data[i]
+				news.appendChild(li)
+			}
+			ct.innerHTML =''
+			ct.appendChild(news)
+		}
+
+		function $(element){
+			return document.querySelector(element)
+		}
+	</script>
+</body>
+</html>

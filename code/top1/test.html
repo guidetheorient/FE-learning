@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>木桶布局</title>
+  <style>
+    .ct{
+      width: 500px;
+      margin: 0 auto;
+    }
+    .img-row{
+      margin-bottom: 10px;
+    }
+    .img-row:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .img-row>div.img{
+      float: left;
+      height: 200px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="ct">
+  </div>
+  <script src="./jquery-3.2.1.min.js"></script>
+  <script>
+    // function Barrel(){
+    //   this.imgRowWidth = 0
+    //   this.imgList = []
+    //   this.$ct = $('.ct')
+    //   this.loadImg()
+    // }
+function getImage(num){
+  var width,height,color,urls = []
+  for(var i= 0;i< num;i++){
+    height = parseInt(Math.random()*100+50)
+    width = parseInt(Math.random()*100+50)
+    color = Math.random().toString(16).substring(2,8)
+    urls.push('http://fakeimg.pl/'+width+'x'+height+'/'+color+',128/000,255')
+  }
+  return urls
+}
+function loadImage(){
+  var imgurls = getImage(20)
+  for(var i = 0;i<imgurls.length;i++){
+    var img = new Image()
+    img.src = imgurls[i]
+    img.onload = function(){
+      console.log(this.width)
+      console.log(this.height)
+    }
+  }
+}
+loadImage()
+
+    // Barrel.prototype = {
+      // getImage:function(num){
+      //   var width,height,color,urls = []
+      //   for(var i= 0;i< num;i++){
+      //     height = parseInt(Math.random()*100+50)
+      //     width = parseInt(Math.random()*100+50)
+      //     color = Math.random().toString(16).substring(2,8)
+      //     urls.push('http://fakeimg.pl/'+width+'x'+height+'/'+color+',128/000,255')
+      //   }
+      //   return urls
+      // },
+
+      // loadImg:function(){
+      //   var _this = this
+      //   var imgurls = this.getImage(20)
+      //   var ctWidth = $('.ct').width()
+      //   var count = 0
+
+      //   xx()
+      //   function xx(){
+      //     for(var i = 0;i<imgurls.length;i++){
+      //       var img = new Image()
+      //       img.src = imgurls[i]
+      //       img.onload = function(){
+      //         console.log(img.width)
+      //         console.log(img.height)
+              // count++
+              // _this.imgList.push(img)
+              // img.width = 100*img.width/img.height
+              // img.height = 100
+              // _this.imgRowWidth += img.width
+              // if(_this.imgRowWidth > ctWidth){
+              //   _this.imgList.pop()
+              //   ratio = ctWidth/(_this.imgRowWidth-img.width)
+
+              //   if($('.ct').height() < $(window).height()){
+              //     console.log(_this.imgList)
+              //     _this.layout()
+              //     _this.imgList = []
+              //     _this.imgRowWidth = 0
+              //     console.log(imgurls)
+              //     imgurls = imgurls.slice(count-1)
+              //     console.log(imgurls)
+              //     count = 0
+              //     xx()
+              //   }
+              // }
+              // if(i === imgurls.length-1){
+              //   imgurls = imgurls.concat(_this.getImage(20))
+              // }
+            // }
+         
+    //       }
+    //     }
+    //   },
+
+    //   layout:function(){
+    //     var _this = this
+    //     this.$ct.append('<div class="img-row"></div>')
+    //     var $imgRow = $('.img-row').last()
+    //     $.each(this.imgList,function(index,el){  //每个el是不是只能append一次
+    //       el.height *= ratio
+    //       el.width *= ratio
+    //       $imgRow.append(el)
+    //     })
+    //   }
+    // }
+
+    // new Barrel()
+  </script>
+</body>
+</html>

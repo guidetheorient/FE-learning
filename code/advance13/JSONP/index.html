@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatiable" content="IE=edge,chrome=1">
+	<title>news</title>
+	<style>
+		.container{
+			width: 900px;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul class="news">
+			<li>第十一日前瞻</li>
+			<li>男双力争会师决赛</li>
+			<li>女排将死磕巴西！</li>
+		</ul>
+		<button class="change">换一组</button>
+	</div>
+	<script>
+		console.log('haha')
+
+		// $('.change').addEventListener('click',function(){
+		// 	var xhr = new XMLHttpRequest()
+		// 	xhr.open('get','http://localhost:8080/getNews',true)
+		// 	xhr.send()
+		// 	xhr.onreadystatechange = function(){
+		// 		if(xhr.readyState === 4 && xhr.status === 200){
+		// 			appendHtml(JSON.parse(xhr.responseText))
+		// 		}
+		// 	}
+		// })
+
+		//直接http://localhost:8080/getNews?callback=appendHtml得到
+		//appendHtml(["1","2","4"])
+
+		//注意localhost默认端口为8080
+		//而网站默认端口为80，模拟的时候注意
+		$('.change').addEventListener('click',function(){
+			var script = document.createElement('script')
+			script.src = 'http://a.jrg.com:8080/getNews?callback=appendHtml'
+			document.head.appendChild(script)
+			document.head.removeChild(script)
+		})
+
+		function appendHtml(news){
+			var html = ''
+			for(var i=0;i<news.length;i++){
+				html+='<li>'+news[i]+'</li>'
+			}
+			console.log(html)
+			$('.news').innerHTML = html
+		}
+
+		function $(id){
+			return document.querySelector(id)
+		}
+	</script>
+</body>
+</html>

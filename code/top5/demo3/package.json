@@ -1,0 +1,27 @@
+{
+  "name": "hunger1-demo1",
+  "version": "0.0.2",
+  "description": "测试版本",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "keywords": [
+    "jirengu"
+  ],
+  "bin":{
+    "hunger1":"./index.js"
+  },
+  "author": "anonymity",
+  "license": "ISC",
+  "dependencies": {
+    "marked": "^0.3.6"
+  },
+  "devDependencies": {
+    "easytpl": "^1.0.4"
+  }
+}

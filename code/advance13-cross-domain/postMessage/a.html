@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>postMessage</title>
+    <style>
+      *{
+        margin:0;
+        padding:0;
+      }
+      body{
+        font-family:'Dengxian','sans-serif';
+        display:flex;
+        height:200px;
+      }
+      ul,iframe{        
+        height:100%;
+        width:50%;
+        border:1px solid red;
+      }
+      iframe{
+        border:1px solid blue
+      }
+    </style>
+</head>
+<body>
+	<ul class="ct">
+	  <input type="text" placeholder="http://a.jrg.com:8080/a.html">
+	</ul>
+  <iframe src="http://b.jrg.com:8080/b.html" frameborder="0"></iframe>
+  <script>
+    //本域名为a.jrg.com   跨域为b.jrg.com
+    var input = $('.ct input')
+    input.addEventListener('input',function (e) {
+      window.frames[0].postMessage(e.target.value,'http://b.jrg.com:8080')
+    })
+
+    window.addEventListener('message',function (e) {
+      input.value = e.data
+    })
+
+    function $(element){
+      return document.querySelector(element)
+    }
+  </script>
+  
+</body>
+</html>

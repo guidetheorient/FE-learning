@@ -1,0 +1,147 @@
+<!-- 相对的是面向过程
+
+面向对象
+1.改善可读性
+2.改善重用性
+
+原则：开放封闭原则
+1.扩展开放open for extension
+2.修改关闭close for modification
+
+三要素
+封装/继承/多态
+封装：把具有逻辑关系的放在一起，比如所有和location相关的封装成一个对象
+继承：重用，拥有父级的方法和属性
+多态：对同一个方法有不同的表现，比如say，每个say的内容不同
+类：相当于图纸
+实例化：将类实例化就是对象
+
+js里创造对象 -->
+
+<!-- var obj = {
+    a:1,
+    b:"111",
+    sya:function(){
+        console.log('22')
+    }
+} -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function Person(name){
+        //     this.name= name
+        //     this.sayName = function(){
+        //         console.log(this.name)
+        //     }
+        //     return Person
+        // }
+        // var person1 = new Person('jidong')
+
+
+function Tab(tabNode){
+    this.init = function(tabNode){
+        this.tabs = tabNode.querySelectorAll('.tab-ct .header>li')
+        this.panels = tabNode.querySelectorAll('.tab-ct .content>li')
+        this.tabHeader = tabNode.querySelector('.tab-ct .header')
+    }
+
+    this.bind = function(){
+        var self = this
+        this.tabHeader.onclick = function(){
+            if(e.target.tagName.toLowerCase() === 'li'){
+                self.tabs.forEach(function(node){
+                  node.classList.remove('active')
+                })
+                var index = [].indexOf.call(self.tabs, e.target)
+                self.panels.forEach(function(node){
+                  node.classList.remove('active')
+                })
+                self.panels[index].classList.add('active')
+            }
+        }
+    }
+
+    this.init(tabNode)
+    this.bind()
+}
+
+
+//利用prototype
+function Tab(tabNode){
+  this.init(tabNode)
+  this.bind()
+}
+
+Tab.prototype.init = function(tabNode){
+  this.tabs = tabNode.querySelectorAll('.tab-ct .header>li')
+  this.panels = tabNode.querySelectorAll('.tab-ct .content>li')
+  this.tabHeader = tabNode.querySelector('.tab-ct .header')
+}
+
+Tab.prototype.bind = function(){
+  var self = this
+  this.tabHeader.onclick = function(){
+    if(e.target.tagName.toLowerCase() === 'li'){
+      self.tabs.forEach(function(node){
+        node.classList.remove('active')
+      })
+      var index = [].indexOf.call(self.tabs, e.target)
+      self.panels.forEach(function(node){
+        node.classList.remove('active')
+      })
+      self.panels[index].classList.add('active')
+    }
+  }
+}
+
+var tabNode1 = document.querySelectorAll('.tab-ct')[0]
+var tabNode2 = document.querySelectorAll('.tab-ct')[1]
+var tabNode3 = document.querySelectorAll('.tab-ct')[2]
+
+var tab1 = new Tab(tabNode1)
+var tab2 = new Tab(tabNode2)
+var tab3 = new Tab(tabNode3)
+
+    </script>
+    <script>
+function Person(name,age){
+  this.name = name
+  this.age = age
+  this.sayName = function(){
+    console.log(this.name)
+  }
+}
+
+var person1 = new Person("Mike",12)
+
+
+function Car(name,color,status){
+  this.name = name
+  this.color = color
+  this.status = status
+}
+Car.prototype = {
+  run:function(){
+    this.status = 'run'
+  },
+  stop:function(){
+    this.status = 'stop'
+  },
+  getStatus:function(){
+    console.log(this.status)
+  }
+}
+
+
+    </script>
+
+
+
+</body>
+</html>

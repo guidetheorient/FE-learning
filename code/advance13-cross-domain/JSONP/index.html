@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSONP</title>
+    <style>
+      body{
+        font-family:'Dengxian','sans-serif';
+      }
+    </style>
+</head>
+<body>
+	<ul class="ct">
+		<li>0</li>
+		<li>0</li>
+		<li>0</li>
+	</ul>
+	<button id='getNews'>get news</button>
+	<script>
+		//假设本域为localhost:8080   请求的域为b.jrg.com
+		var ct = $('.ct')
+		var btn = $('#getNews')
+		btn.addEventListener('click',function(){
+			var script = document.createElement('script')
+			script.src = 'http://b.jrg.com:8080/getNews?callback=getNews'
+			document.body.appendChild(script)
+			document.body.removeChild(script)
+		})
+
+		function getNews(data){
+			var news = document.createDocumentFragment()
+			for(var i=0;i<data.length;i++){
+				var li = document.createElement('li')
+				li.innerText = data[i]
+				news.appendChild(li)
+			}
+			ct.innerHTML =''
+			ct.appendChild(news)
+		}
+
+		function $(element){
+			return document.querySelector(element)
+		}
+	</script>
+</body>
+</html>

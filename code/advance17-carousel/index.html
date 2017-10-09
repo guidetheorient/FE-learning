@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carousel</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul,li{
+      list-style: none;
+    }
+    .carousel{
+      width: 600px;
+      overflow: hidden;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 10px;
+    }
+    .arrow-icon li{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      position: absolute;
+      top:50%;
+      margin-top: -25px;
+      text-align: center;
+      line-height: 50px;
+      border:1px solid #fff;
+      font-size: 30px;
+      font-weight: 100;
+      font-family: 'sans-serif';
+      color: #fff;
+      cursor: pointer;
+    }
+    .pre-arrow{
+      left: 20px;
+    }
+    .next-arrow{
+      right: 20px;
+    }
+    .rect-icon{
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      text-align: center;
+    }
+    .rect{
+      display: inline-block;
+      width: 40px;
+      height: 8px;
+      margin: 10px 5px;
+      border-radius: 10px;
+      border:1px solid #fff;
+      cursor: pointer;
+    }
+    .rect.active{
+      background-color: #fff;
+    }
+    ul.img-ct{
+      font-size: 0;
+      position: relative;
+      z-index: -1;
+      left: -600px;
+    }
+    .img-ct li{
+      display: inline-block;
+    }
+    .img-ct img{
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <ul class="arrow-icon">
+      <li class="pre-arrow"><</li>
+      <li class="next-arrow">></li>
+    </ul>
+    <ul class="rect-icon">
+      <li class="rect active"></li>
+    </ul>
+    <ul class="img-ct">
+      <li><img src="https://ooo.0o0.ooo/2017/06/24/594dd36f6a2e2.jpg" alt=""></li>
+      <li><img src="https://ooo.0o0.ooo/2017/06/24/594dd36f6c2fd.jpg" alt=""></li>
+      <li><img src="https://ooo.0o0.ooo/2017/06/24/594dd36f33c46.jpg" alt=""></li>
+      <li><img src="https://ooo.0o0.ooo/2017/06/24/594dd36ee8c00.jpg" alt=""></li>
+      <li><img src="https://ooo.0o0.ooo/2017/06/24/594dd36e5d51b.jpg" alt=""></li>
+    </ul>
+  </div>
+  <script src="jquery-3.2.0.js"></script>
+  <script>
+    var $preArrow = $('.pre-arrow')
+    var $nextArrow = $('.next-arrow')
+    var $imgCt = $('.img-ct')
+
+    var $rectIcon = $('.rect-icon')
+    //使图片水平排列
+    var imgWidth =$('.img-ct img').width()
+    var imgQuanity = $('.img-ct img').length
+    $imgCt.width((imgQuanity+2)*imgWidth)
+
+    //复制首尾元素
+    var $imgCtChildren = $imgCt.children()
+    $imgCt.append($imgCtChildren.first().clone())
+    $imgCt.prepend($imgCtChildren.last().clone())
+
+    var index = 0;
+    
+    $preArrow.on('click',function(){
+      showBefore()
+    })
+    
+    $nextArrow.on('click',function(){
+      showAfter()
+    })
+    $rectIcon.on('click','.rect',function(){
+      var interval = $(this).index() -index
+      if(interval < 0){
+        showBefore(-interval)
+      }else if($(this).index() > index){
+        showAfter(interval)
+      }
+    })
+
+    function showBefore(interval){
+      if(interval == undefined){interval=1}
+      $imgCt.finish().animate({
+        left : '+='+imgWidth*interval,    //引号
+      },function(){ //回调函数必须写在animate中，如果在外面的话，动画没有执行完就会执行
+        index-=interval
+        if(index < 0){
+          $imgCt.css({'left':-imgWidth*imgQuanity+'px'})
+          index = imgQuanity-1
+        }
+        setRect()
+      })
+    }
+
+    function showAfter(interval){
+      if(interval == undefined){interval=1}
+      $imgCt.finish().animate({
+        left : '-='+imgWidth*interval,
+      },function(){
+        index+=interval
+        if(index === imgQuanity){
+          $imgCt.css({'left':-imgWidth+'px'})
+          index = 0
+        }
+        setRect()
+      })
+    }
+
+    function setRect(){
+      $rectIcon.children().removeClass('active').eq(index).addClass('active')
+    }
+
+    createRect(5)
+    function createRect(rectIndex){
+      var html = ''
+      for(let i = 0; i<rectIndex-1;i++){
+        html+='<li class="rect"></li>'
+      }
+      $rectIcon.append(html)
+    }
+//在用户点击的情况下，重新计时
+    autoPlay()
+    function autoPlay(){
+      clock = setInterval(function(){showAfter()},2000)
+      
+      //多个选择器绑定可以$()用逗号隔开
+      //多个对象绑定同一事件可以用add()
+      $preArrow.add($nextArrow).add($rectIcon).on('click',function(){
+        clearInterval(clock)
+        clock = setInterval(function(){showAfter()},2000)
+
+      })
+    }
+    function stopPlay(){
+      clearInterval(clock)
+    }
+  </script>
+</body>
+</html>
