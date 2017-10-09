@@ -1,38 +1,41 @@
 function setRouter(app){ 
  var router = app; 
 
-/**
- * ʹ�÷���
- */
+/*
+1.mock工具 server-mock可以识别router.js  server-mock依赖了ejs,所以不用安装ejs啦
+2.访问localhost:8080/user
+*/
 
 
 /**
- * ���� GET ������ �޲���
+ * 发送 GET 请求， 无参数
  * GET /query
- * ������Ӧ����
+ * 返回响应数据
  */
 app.get('/friends', function(req, res) {
-	//req.query ���Ի�ȡ��������
+	//req.query 可以获取请求参数
 	var username = req.query.username
 	var ret = ['nobody']
 	if(username == 'ruoyu'){
-		ret = ['С��', 'С��']
+		ret = ['小明', '小刚']
 	}
-	res.send(ret)  //res.send���ڷ�������
+	res.send(ret)  //res.send用于发送数据
 
 });
 
 
 /**
- * ҳ��·�ɣ���ģ����Ⱦҳ����Ⱦҳ��, 
+ * 页面路由，从模板渲染页面渲染页面, 
  * http://localhost:8080/user
- * ֧�� ejs, jade ģ��
+ * 支持 ejs, jade 模板
+ * get的参数通过query取,详见bodejs的取参方式
  */
 app.get('/user', function(req, res) {
-	var username = req.query.username
+  var username = req.query.username
+  console.log(req.query)
 	var friends
 	if(username == 'ruoyu'){
-		friends = ['С��', 'С��']
+		friends = ['小明', '小刚']
 	}else {
 		friends = ['nobody']
 	}
@@ -42,24 +45,26 @@ app.get('/user', function(req, res) {
 	});
 });
 
+// post的参数通过req.body获取
+
 app.post('/user', function(req, res) {
-	var username = req.body.username
-	console.log(username)
+  var username = req.body.username
+  console.log(req.body,1)
 	var friends
 	if(username == 'ruoyu'){
-		friends = ['С��', 'С��']
+		friends = ['小明', '小刚']
 	}else {
 		friends = ['nobody']
 	}
 
-	setTimeout(function(){
-			res.render('user.ejs', {
-		friends: friends
-	});
-	}, 8000)
-	// res.render('user.ejs', {
+	// setTimeout(function(){
+	// 		res.render('user.ejs', {
 	// 	friends: friends
 	// });
+	// }, 8000)
+	res.render('user.ejs', {
+		friends: friends
+	});
 });
 
 

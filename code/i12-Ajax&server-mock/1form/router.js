@@ -1,37 +1,43 @@
 /*
-1.È«¾Ö°²×°ejs
-2.mock¹¤¾ß server-mock¿ÉÒÔÊ¶±ğrouter.js
-3.·ÃÎÊlocalhost:8080/user
+Ajaxä¹‹å‰æ˜¯formè¡¨å•
+*/
+
+
+/*ä½¿ç”¨
+1.mockå·¥å…· server-mockå¯ä»¥è¯†åˆ«router.js  server-mockä¾èµ–äº†ejs,æ‰€ä»¥ä¸ç”¨å®‰è£…ejså•¦
+2.è®¿é—®localhost:8080/user
 */
 
 
 /**
- * ·¢ËÍ GET ÇëÇó£¬ ÎŞ²ÎÊı
+ * å‘é€ GET è¯·æ±‚ï¼Œ æ— å‚æ•°
  * GET /query
- * ·µ»ØÏìÓ¦Êı¾İ
+ * è¿”å›å“åº”æ•°æ®
  */
 app.get('/friends', function(req, res) {
-	//req.query ¿ÉÒÔ»ñÈ¡ÇëÇó²ÎÊı
+	//req.query å¯ä»¥è·å–è¯·æ±‚å‚æ•°
 	var username = req.query.username
 	var ret = ['nobody']
 	if(username == 'ruoyu'){
-		ret = ['Ğ¡Ã÷', 'Ğ¡¸Õ']
+		ret = ['å°æ˜', 'å°åˆš']
 	}
-	res.send(ret)  //res.sendÓÃÓÚ·¢ËÍÊı¾İ
+	res.send(ret)  //res.sendç”¨äºå‘é€æ•°æ®
 
 });
 
 
 /**
- * Ò³ÃæÂ·ÓÉ£¬´ÓÄ£°åäÖÈ¾Ò³ÃæäÖÈ¾Ò³Ãæ, 
+ * é¡µé¢è·¯ç”±ï¼Œä»æ¨¡æ¿æ¸²æŸ“é¡µé¢æ¸²æŸ“é¡µé¢, 
  * http://localhost:8080/user
- * Ö§³Ö ejs, jade Ä£°å
+ * æ”¯æŒ ejs, jade æ¨¡æ¿
+ * getçš„å‚æ•°é€šè¿‡queryå–,è¯¦è§bodejsçš„å–å‚æ–¹å¼
  */
 app.get('/user', function(req, res) {
-	var username = req.query.username
+  var username = req.query.username
+  console.log(req.query)
 	var friends
 	if(username == 'ruoyu'){
-		friends = ['Ğ¡Ã÷', 'Ğ¡¸Õ']
+		friends = ['å°æ˜', 'å°åˆš']
 	}else {
 		friends = ['nobody']
 	}
@@ -41,24 +47,26 @@ app.get('/user', function(req, res) {
 	});
 });
 
+// postçš„å‚æ•°é€šè¿‡req.bodyè·å–
+
 app.post('/user', function(req, res) {
-	var username = req.body.username
-	console.log(username)
+  var username = req.body.username
+  console.log(req.body,1)
 	var friends
 	if(username == 'ruoyu'){
-		friends = ['Ğ¡Ã÷', 'Ğ¡¸Õ']
+		friends = ['å°æ˜', 'å°åˆš']
 	}else {
 		friends = ['nobody']
 	}
 
-	setTimeout(function(){
-			res.render('user.ejs', {
-		friends: friends
-	});
-	}, 8000)
-	// res.render('user.ejs', {
+	// setTimeout(function(){
+	// 		res.render('user.ejs', {
 	// 	friends: friends
 	// });
+	// }, 8000)
+	res.render('user.ejs', {
+		friends: friends
+	});
 });
 
 

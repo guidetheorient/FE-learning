@@ -19,19 +19,28 @@
     
 
     btn.addEventListener('click', function(){
-       var xhr = new XMLHttpRequest()
-       xhr.onreadystatechange = function(){
-         if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
-          var friends = JSON.parse(xhr.responseText)
-          render(friends)
-         }
-       }
+      var xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function(){
+        //什么时候js可以拿到数据
+        //可以在下一行添加断点，在浏览器soure添加watch xhr这个对象
+        if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+        var friends = JSON.parse(xhr.responseText)
+        render(friends)
+        }
+      }
 
       xhr.open('get', '/getFriends?username=' + input.value, true)
       xhr.send()
     })
-
-
+    
+    //同步，发送后页面就无法操作了
+    btn.addEventListener('click', function(){
+      var xhr = new XMLHttpRequest()
+      xhr.open('get', '/getFriends?username=' + input.value, false)
+      xhr.send()
+      var friends = JSON.parse(xhr.responseText)
+      render(friends)
+    })
 
 
     function render(friends){

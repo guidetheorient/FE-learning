@@ -1,3 +1,5 @@
+//ajax方式
+
 app.get('/friends',function(req,res){
   //req.query可以获取请求参数
   var username = req.query.username
@@ -8,9 +10,10 @@ app.get('/friends',function(req,res){
   setTimeout(function(){
     res.send(ret)
   }, 3000) 
-  //res.send(ret)//res.send用于发送数据,然后前端通过js来生成html
+  //res.send(ret) //res.send是express用于发送数据,然后前端通过js来生成html
 })
 
+//form表单方式
 
 // app.get('/user',function(req,res){
 //  var username = req.query.username
