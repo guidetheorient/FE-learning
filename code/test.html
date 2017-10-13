@@ -6,6 +6,8 @@
 </head>
 <body>
     <script>
+
+
 // //工厂模式
 // function createPerson (name,age) {
 //     var person = {
@@ -18,7 +20,7 @@
 //     return person
 // }
 
-// //构造函数模式
+//构造函数模式
 // function Person(name,age){
 //     this.name = name
 //     this.age = age
@@ -27,7 +29,7 @@
 //     console.log(this.name)
 // }
 
-// //混合模式
+//混合模式
 // function Person(name,age){
 //     this.name = name
 //     this.age = age
@@ -35,7 +37,7 @@
 // Person.prototype.sayName = function(){
 //     console.log(this.name)
 // }
-// function Stundent(name,age,school){
+// function Student(name,age,school){
 //     Person.call(this,name,age)
 //     this.school = school
 // }
@@ -44,11 +46,12 @@
 //     F.prototype = obj
 //     return new F()
 // }
-// Stundent.prototype = objCreate(Person.prototype)
-// Stundent.prototype.constructor = Stundent
-// Stundent.prototype.saySchool = function(){
+// Student.prototype = objCreate(Person.prototype)
+// Student.prototype.constructor = Student
+// Student.prototype.saySchool = function(){
 //     console.log(this.school)
 // }
+
 
 // //模块模式
 // var person = (function(){
@@ -61,6 +64,7 @@
 //         sayName:sayName
 //     }
 // })()
+
 
 // //单例模式
 // var person = (function(){
@@ -129,6 +133,10 @@ var Event = (function(){
         fire:fire
     }
 })()
+
+
+
+
     </script>
 </body>
 </html>

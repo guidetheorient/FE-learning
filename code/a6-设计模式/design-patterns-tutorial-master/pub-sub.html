@@ -51,6 +51,7 @@
 			<script type="text/javascript">
 				var pubSub = new PubSub();
 				pubSub.on('click',function(data){
+					console.log(data)
 					$('#ps-btn span').html(data[data.length - 1]);
 				});
 				pubSub.on('click',function(data){
